@@ -23,104 +23,126 @@
         
         body { background-color: var(--cupido-pink-light); display: flex; justify-content: center; min-height: 100vh; }
 
-        .mobile-container {
-            width: 100%; max-width: 414px; background-color: var(--card-white);
+        .app-container {
+            width: 100%; background-color: var(--card-white);
             min-height: 100vh; position: relative; padding-bottom: 100px;
-            box-shadow: 0 0 25px rgba(235, 26, 26, 0.1);
+            box-shadow: 0 0 25px rgba(235, 26, 26, 0.05);
+        }
+
+        /* Responsive Container */
+        @media (min-width: 768px) {
+            .app-container {
+                max-width: 1200px; margin: 20px; border-radius: 25px;
+                min-height: calc(100vh - 40px); overflow: hidden;
+                box-shadow: 0 10px 40px rgba(235, 26, 26, 0.15);
+            }
         }
 
         /* HEADER */
         header {
             display: flex; flex-direction: column; align-items: center;
-            padding: 25px 20px 15px 20px; background-color: white;
+            padding: 20px; background-color: white;
             position: sticky; top: 0; z-index: 20;
             border-bottom: 2px solid var(--cupido-pink-med);
         }
+        @media (min-width: 768px) { header { flex-direction: row; justify-content: space-between; padding: 20px 40px; } }
+
         .header-title { font-weight: 700; font-size: 24px; color: var(--cupido-red); letter-spacing: -0.5px; }
         .whatsapp-info { 
             display: flex; align-items: center; gap: 8px; margin-top: 5px; 
             font-size: 14px; color: var(--text-gray); font-weight: 500; text-decoration: none;
             background: var(--cupido-pink-light); padding: 5px 15px; border-radius: 20px;
+            transition: 0.3s;
         }
+        .whatsapp-info:hover { background: var(--cupido-pink-med); color: var(--cupido-red); }
         .whatsapp-info i { color: #25D366; font-size: 16px; }
 
-        /* BUSCADOR */
-        .search-container {
-            padding: 15px 20px; background-color: white;
-            position: sticky; top: 90px; z-index: 19;
+        /* ESTADO */
+        .status-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 4px 12px; border-radius: 20px;
+            font-size: 11px; font-weight: 600; margin: 5px 0;
+            background: #f3f4f6; color: #666;
         }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background-color: #ccc; }
+        .status-open .status-dot { background-color: #10B981; animation: pulse-green 2s infinite; }
+        .status-open { color: #065f46; background: #D1FAE5; border: 1px solid #10B981; }
+        .status-closed .status-dot { background-color: #EF4444; }
+        .status-closed { color: #7f1d1d; background: #FEE2E2; border: 1px solid #EF4444; }
+        @keyframes pulse-green { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); } 70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); } 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); } }
+
+        /* BUSCADOR */
+        .search-container { padding: 15px 20px; background-color: white; position: sticky; top: 85px; z-index: 19; }
+        @media (min-width: 768px) { .search-container { top: 80px; padding: 20px 40px; } }
         .search-box {
             display: flex; align-items: center; background-color: var(--cupido-pink-light);
-            border: 1px solid var(--cupido-pink-med);
-            border-radius: 15px; padding: 12px 15px;
+            border: 1px solid var(--cupido-pink-med); border-radius: 15px; padding: 12px 15px;
+            max-width: 600px; margin: 0 auto;
         }
         .search-box i { color: var(--cupido-red); margin-right: 10px; opacity: 0.5; }
-        .search-box input {
-            border: none; background: transparent; outline: none;
-            width: 100%; font-size: 14px; color: var(--text-dark);
-        }
+        .search-box input { border: none; background: transparent; outline: none; width: 100%; font-size: 14px; color: var(--text-dark); }
 
         /* HERO */
-        .hero { padding: 10px 20px; text-align: center; }
-        .hero h1 { font-size: 26px; color: var(--text-dark); line-height: 1.2; }
+        .hero { padding: 20px; text-align: center; }
+        .hero h1 { font-size: 28px; color: var(--text-dark); line-height: 1.2; }
         .hero h1 span { color: var(--cupido-red); font-style: italic; }
-        .hero p { color: var(--text-gray); font-size: 13px; margin-top: 5px; }
+        .hero p { color: var(--text-gray); font-size: 14px; margin-top: 5px; }
 
-        /* FILTROS (Navegación Arrastrable) */
-        .filter-wrapper { position: relative; display: flex; align-items: center; padding: 10px 5px; }
-        .scroll-arrow { background: white; border: 1px solid var(--cupido-pink-med); width: 30px; height: 30px; border-radius: 50%; color: var(--cupido-red); z-index: 5; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; }
-        
+        /* FILTROS */
+        .filter-wrapper { position: relative; display: flex; align-items: center; padding: 10px 5px; justify-content: center; }
+        .scroll-arrow { background: white; border: 1px solid var(--cupido-pink-med); width: 35px; height: 35px; border-radius: 50%; color: var(--cupido-red); z-index: 5; cursor: pointer; display: flex; align-items: center; justify-content: center; transition:0.3s; }
+        .scroll-arrow:hover { background: var(--cupido-red); color: white; }
         .filters { 
             display: flex; gap: 10px; overflow-x: auto; scroll-behavior: smooth; 
-            padding: 5px 10px; width: 100%; scrollbar-width: none; cursor: grab; /* Cursor de manito */
+            padding: 10px; width: 100%; max-width: 800px; scrollbar-width: none; cursor: grab; 
         }
-        .filters.active { cursor: grabbing; cursor: -webkit-grabbing; } /* Cursor agarrando */
+        .filters.active { cursor: grabbing; }
         .filters::-webkit-scrollbar { display: none; }
-        
         .filter-btn { 
-            padding: 8px 20px; border-radius: 25px; 
-            border: 1px solid var(--cupido-pink-dark); 
-            background: white; color: var(--text-dark); 
-            font-size: 13px; font-weight: 500; cursor: pointer; 
-            white-space: nowrap; transition: 0.3s; 
-            user-select: none; /* Evita seleccionar el texto al arrastrar */
+            padding: 8px 25px; border-radius: 25px; border: 1px solid var(--cupido-pink-dark); 
+            background: white; color: var(--text-dark); font-size: 14px; font-weight: 500; 
+            cursor: pointer; white-space: nowrap; transition: 0.3s; user-select: none;
         }
-        .filter-btn.active { 
-            background-color: var(--cupido-red); 
-            color: white; border-color: var(--cupido-red); 
-            box-shadow: 0 4px 10px rgba(235, 26, 26, 0.3);
-        }
+        .filter-btn:hover { background-color: var(--cupido-pink-light); }
+        .filter-btn.active { background-color: var(--cupido-red); color: white; border-color: var(--cupido-red); transform: scale(1.05); }
 
         /* GRILLA */
-        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 20px; }
+        .product-grid { display: grid; gap: 15px; padding: 20px; grid-template-columns: repeat(2, 1fr); }
+        @media (min-width: 600px) { .product-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 20px 40px; } }
+        @media (min-width: 1024px) { .product-grid { grid-template-columns: repeat(4, 1fr); gap: 25px; } }
         
         .card { 
             background: white; border-radius: 16px; overflow: hidden; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            border: 1px solid var(--cupido-pink-med); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid var(--cupido-pink-med); 
             display: flex; flex-direction: column; transition: 0.3s; 
         }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(235, 26, 26, 0.1); }
         .card.selected { border: 2px solid var(--cupido-red); background-color: var(--cupido-pink-light); }
+        .card-image-container { height: 160px; width: 100%; position: relative; cursor: pointer; overflow: hidden; }
+        @media (min-width: 768px) { .card-image-container { height: 220px; } }
+        .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover .card-img { transform: scale(1.05); }
         
-        .card-image-container { height: 160px; width: 100%; position: relative; cursor: pointer; }
-        .card-img { width: 100%; height: 100%; object-fit: cover; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
         
-        .badge { position: absolute; top: 8px; padding: 4px 10px; border-radius: 10px; font-size: 10px; font-weight: 700; z-index: 2; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .badge-bestseller { left: 8px; background: white; color: var(--cupido-red); }
-        .badge-discount { right: 8px; background: var(--cupido-red); color: white; }
+        .badge { position: absolute; top: 10px; padding: 4px 10px; border-radius: 10px; font-size: 11px; font-weight: 700; z-index: 2; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .badge-bestseller { left: 10px; background: white; color: var(--cupido-red); }
+        .badge-discount { right: 10px; background: var(--cupido-red); color: white; }
         
-        .card-content { padding: 12px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
-        .card-title { font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px; line-height: 1.3; }
-        .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .card-content { padding: 15px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .card-title { font-size: 14px; font-weight: 600; color: var(--text-dark); margin-bottom: 8px; line-height: 1.3; }
+        .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .price { color: var(--cupido-red); font-weight: 700; font-size: 16px; }
-        .old-price { font-size: 11px; text-decoration: line-through; color: var(--text-gray); }
+        .old-price { font-size: 12px; text-decoration: line-through; color: var(--text-gray); }
         
         .btn-select { 
             width: 100%; padding: 10px; background-color: white; color: var(--cupido-red); 
             border: 1px solid var(--cupido-red); border-radius: 10px; 
-            font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; 
+            font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.2s; 
         }
         .btn-select.active { background-color: var(--cupido-red); color: white; }
+        .btn-select:hover { background-color: var(--cupido-red); color: white; }
 
         /* MODAL */
         .modal {
@@ -129,32 +151,36 @@
             backdrop-filter: blur(5px);
         }
         .modal-content {
-            background-color: white; margin: 15%; padding: 0; border-radius: 20px;
-            width: 90%; max-width: 400px; position: relative; overflow: hidden;
+            background-color: white; margin: 0; padding: 0; border-radius: 20px;
+            width: 90%; max-width: 450px; position: relative; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: slideUp 0.3s ease;
         }
+        @media (min-width: 768px) { .modal-content { max-width: 500px; } }
         @keyframes slideUp { from {transform: translateY(50px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
         
-        .modal-img { width: 100%; height: 300px; object-fit: cover; }
-        .modal-body { padding: 20px; text-align: center; }
-        .modal-title { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 5px; }
-        .modal-price { font-size: 24px; color: var(--cupido-red); font-weight: 700; margin-bottom: 15px; }
+        .modal-img { width: 100%; height: 350px; object-fit: cover; }
+        .modal-body { padding: 25px; text-align: left; }
+        .modal-title { font-size: 22px; font-weight: 700; color: var(--text-dark); margin-bottom: 5px; }
+        .modal-price { font-size: 26px; color: var(--cupido-red); font-weight: 700; margin-bottom: 15px; }
+        .modal-desc { font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 20px; white-space: pre-wrap; } /* pre-wrap respeta saltos de línea del Excel */
+        
         .close-modal {
-            position: absolute; top: 15px; right: 15px; background: white; width: 35px; height: 35px;
+            position: absolute; top: 15px; right: 15px; background: white; width: 40px; height: 40px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 20px; color: var(--text-dark); cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            font-size: 24px; color: var(--text-dark); cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.2); transition: 0.2s;
         }
+        .close-modal:hover { transform: rotate(90deg); }
 
         /* FLOTANTE */
         .whatsapp-float { 
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
-            width: 90%; max-width: 380px; 
-            background-color: #25D366; 
+            width: 90%; max-width: 350px; background-color: #25D366; 
             color: white; padding: 15px; border-radius: 50px; 
             display: flex; justify-content: space-between; align-items: center; 
             box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4); 
             cursor: pointer; z-index: 90; opacity: 0; pointer-events: none; transition: 0.3s; 
         }
+        .whatsapp-float:hover { transform: translateX(-50%) scale(1.05); }
         .whatsapp-float.visible { opacity: 1; pointer-events: all; bottom: 30px; }
 
         /* LOADER */
@@ -167,14 +193,22 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .footer-social { text-align: center; padding: 40px 20px; background: white; margin-top: 20px; border-top: 1px solid var(--cupido-pink-med); }
-        .social-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--cupido-pink-light); display: flex; align-items: center; justify-content: center; color: var(--cupido-red); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .social-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--cupido-pink-light); display: flex; align-items: center; justify-content: center; color: var(--cupido-red); box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; }
+        .social-btn:hover { background: var(--cupido-red); color: white; transform: translateY(-3px); }
     </style>
 </head>
 <body>
 
-    <div class="mobile-container">
+    <div class="app-container">
         <header>
-            <div class="header-title">Alessia Design <span style="font-size:12px; color: #F6B6D8;">❤</span></div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
+                <div class="header-title">Alessia Design <span style="font-size:12px; color: #F6B6D8;">❤</span></div>
+                <div id="businessStatus" class="status-badge">
+                    <div class="status-dot"></div>
+                    <span id="statusText">Cargando horario...</span>
+                </div>
+            </div>
+            
             <a href="https://wa.me/51977414678" target="_blank" class="whatsapp-info">
                 <i class="fab fa-whatsapp"></i> 977 414 678
             </a>
@@ -234,8 +268,8 @@
                 <div class="modal-body">
                     <h2 id="modalTitle" class="modal-title">Nombre Producto</h2>
                     <div id="modalPrice" class="modal-price">S/0.00</div>
-                    <p style="font-size:13px; color:#666; margin-bottom:20px;">
-                        Incluye tarjeta de dedicatoria personalizada.
+                    <p id="modalDesc" class="modal-desc">
+                        Cargando descripción...
                     </p>
                     <button class="btn-select active" style="padding:15px; width:100%;" onclick="closeModal(event)">
                         Seguir Comprando
@@ -243,7 +277,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <script>
@@ -254,7 +287,6 @@
         let currentCategory = 'all'; 
         let currentSearch = '';
 
-        // --- CARGAR DATOS ---
         async function loadData() {
             try {
                 const response = await fetch(SHEET_URL);
@@ -267,15 +299,15 @@
             }
         }
 
-        // --- CSV A JSON ---
+        // CSV A JSON (Automáticamente detectará tu nueva columna 'description')
         function csvToJson(csv) {
             const lines = csv.split('\n');
             const result = [];
             const headers = lines[0].split(',').map(h => h.trim().replace(/\r/g, ''));
-
             for (let i = 1; i < lines.length; i++) {
                 if (!lines[i]) continue;
                 const obj = {};
+                // Regex para respetar comas dentro de comillas (por si usas comas en tu descripción)
                 const currentline = lines[i].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
                 headers.forEach((header, j) => {
                     let value = currentline[j]?.replace(/\r/g, '').replace(/"/g, '') || '';
@@ -289,19 +321,17 @@
             return result;
         }
 
-        // --- CALIDAD MÁXIMA DE IMAGEN (Sin compresión) ---
         function fixDriveLink(url) {
             if (!url || url.trim() === '') return 'https://via.placeholder.com/400?text=Sin+Imagen'; 
             if (url.includes('drive.google.com') && url.includes('/d/')) {
                 const id = url.split('/d/')[1].split('/')[0];
                 const driveLink = `https://drive.google.com/uc?export=view&id=${id}`;
-                // Quitamos parámetros de compresión para mantener calidad
                 return `https://wsrv.nl/?url=${encodeURIComponent(driveLink)}`; 
             }
             return `https://wsrv.nl/?url=${encodeURIComponent(url)}`;
         }
 
-        // --- RENDERIZAR ---
+        // RENDERIZAR
         function renderProducts(categoryOverride) {
             if (categoryOverride) currentCategory = categoryOverride;
             const grid = document.getElementById('productGrid');
@@ -332,9 +362,10 @@
                 const oldPriceHTML = product.oldPrice ? `<span class="old-price">S/${product.oldPrice}</span>` : '';
                 const imgUrl = fixDriveLink(product.image);
 
+                // IMPORTANTE: Ahora pasamos el ID del producto, no todo el texto
                 const card = `
-                    <div class="${cardClass}" id="card-${product.id}">
-                        <div class="card-image-container" onclick="openModal('${product.name}', ${product.price}, '${imgUrl}')">
+                    <div class="${cardClass} reveal" id="card-${product.id}">
+                        <div class="card-image-container" onclick="openModal(${product.id})">
                             ${tagHTML}
                             <img src="${imgUrl}" alt="${product.name}" class="card-img" referrerpolicy="no-referrer">
                         </div>
@@ -350,14 +381,52 @@
                 `;
                 grid.innerHTML += card;
             });
+            initScrollReveal();
         }
 
-        // --- LÓGICA DE ARRASTRE (DRAG TO SCROLL) ---
+        // --- MODAL INTELIGENTE ---
+        // Ahora busca el producto en la memoria y saca la descripción
+        function openModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const imgUrl = fixDriveLink(product.image);
+            
+            document.getElementById('modalImg').src = imgUrl;
+            document.getElementById('modalTitle').innerText = product.name;
+            document.getElementById('modalPrice').innerText = 'S/' + product.price;
+            
+            // Aquí inyectamos la descripción o un texto por defecto
+            const desc = product.description && product.description.trim() !== '' 
+                         ? product.description 
+                         : "Incluye tarjeta de dedicatoria personalizada y finos acabados.";
+            
+            document.getElementById('modalDesc').innerText = desc;
+            
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        function closeModal(event) {
+            if (event.target.classList.contains('modal') || event.target.classList.contains('close-modal') || event.target.tagName === 'BUTTON') {
+                document.getElementById('productModal').style.display = 'none';
+            }
+        }
+
+        // SCROLL REVEAL
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        // DRAG SCROLL
         const slider = document.getElementById('filtersContainer');
         let isDown = false;
         let startX;
         let scrollLeft;
-
         slider.addEventListener('mousedown', (e) => {
             isDown = true;
             slider.classList.add('active');
@@ -370,25 +439,11 @@
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; // Velocidad de arrastre
+            const walk = (x - startX) * 2;
             slider.scrollLeft = scrollLeft - walk;
         });
 
-        // --- MODAL ---
-        function openModal(title, price, img) {
-            document.getElementById('modalImg').src = img;
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalPrice').innerText = 'S/' + price;
-            document.getElementById('productModal').style.display = 'flex';
-        }
-
-        function closeModal(event) {
-            if (event.target.classList.contains('modal') || event.target.classList.contains('close-modal') || event.target.tagName === 'BUTTON') {
-                document.getElementById('productModal').style.display = 'none';
-            }
-        }
-
-        // --- CARRITO & WHATSAPP (SIN EMOJIS DECORATIVOS) ---
+        // CART & WHATSAPP
         function toggleProduct(id) {
             const index = cart.indexOf(id);
             if (index === -1) cart.push(id);
@@ -396,7 +451,6 @@
             renderProducts(); 
             updateFloatingButton();
         }
-
         function updateFloatingButton() {
             const floatBtn = document.getElementById('whatsappFloat');
             const floatText = document.getElementById('floatText');
@@ -407,23 +461,33 @@
                 floatBtn.classList.remove('visible');
             }
         }
-
         function sendOrder() {
             if (cart.length === 0) return;
-            // Mensaje limpio sin emojis decorativos
             let message = "Hola Alessia Design, me gustaria pedir:%0A%0A";
             let total = 0;
             cart.forEach(id => {
                 const p = products.find(x => x.id === id);
-                if(p) { 
-                    message += `- ${p.name} (S/${p.price})%0A`; // Usamos guión en lugar de bullet
-                    total += p.price; 
-                }
+                if(p) { message += `- ${p.name} (S/${p.price})%0A`; total += p.price; }
             });
             message += `%0A*Total Estimado: S/${total}*`;
-            // Se quitó la pregunta de disponibilidad
-            
             window.open(`https://wa.me/51977414678?text=${message}`, '_blank');
+        }
+
+        // HORARIO
+        function checkBusinessHours() {
+            const now = new Date();
+            const hour = now.getHours();
+            const day = now.getDay();
+            const statusDiv = document.getElementById('businessStatus');
+            const statusText = document.getElementById('statusText');
+            const isOpen = (day !== 0) && (hour >= 9 && hour < 20);
+            if (isOpen) {
+                statusDiv.className = 'status-badge status-open';
+                statusText.innerText = 'Abierto ahora';
+            } else {
+                statusDiv.className = 'status-badge status-closed';
+                statusText.innerText = 'Cerrado ahora';
+            }
         }
 
         function filterProducts(cat, element) {
@@ -433,19 +497,18 @@
             currentSearch = '';
             renderProducts(cat);
         }
-
         function handleSearch() {
             const input = document.getElementById('searchInput');
             currentSearch = input.value.toLowerCase();
             renderProducts();
         }
-
         function scrollContainer(d) { 
             document.getElementById('filtersContainer').scrollBy({ left: d * 100, behavior: 'smooth' }); 
         }
 
-        // INICIAR
         loadData();
+        checkBusinessHours();
+        setInterval(checkBusinessHours, 60000);
     </script>
 </body>
 </html>
