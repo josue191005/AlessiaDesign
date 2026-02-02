@@ -4,417 +4,418 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta name="description" content="Fiore Di Ale: Arreglos florales, tulipanes y regalos personalizados con amor y frescura.">
-    <title>Fiore Di Ale | Detalles que Enamoran</title>
+    <meta name="description" content="Fiore Di Ale: Arreglos florales exclusivos y detalles que enamoran.">
+    <title>Fiore Di Ale | Boutique Floral</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="icon" href="https://wsrv.nl/?url=https://drive.google.com/uc?id=1H7HHaMHmOaWKJy1NT7vnR5zLLTbMNLCG&mask=circle">
     
     <style>
-        /* --- 1. IDENTIDAD VISUAL ELEGANTE --- */
+        /* --- 1. ESTÉTICA BLOOM (Minimalista & Cream) --- */
         :root {
-            --primary-color: #D81B60; 
-            --primary-dark: #ad1457;
-            --secondary-color: #F8BBD0; 
-            --bg-color: #FFF5F8; 
-            --card-bg: #ffffff;
-            --text-main: #4A0E2E; 
-            --text-light: #880E4F;
-            --gold: #D4AF37;
+            --bg-color: #ffeffc;       /* FONDO BLANCO PURO */
+            --header-bg: #FFFFFF;      /* Cabecera Blanca */
+            --text-main: #1A1A1A;      /* Texto Negro/Gris oscuro */
+            --text-light: #666666;
+            --accent-color: #D81B60;   /* Color Principal: ROSA INTENSO */
+            --gold: #C5A059;
+            --border-color: #F8BBD0;   /* Líneas y bordes: ROSA PASTEL */
             
             --font-title: 'Playfair Display', serif;
-            --font-body: 'Raleway', sans-serif;
+            --font-body: 'Lato', sans-serif;
             
-            --shadow: 0 10px 30px rgba(216, 27, 96, 0.1);
-            --radius: 15px;
+            --radius: 4px;
+            --shadow: 0 4px 20px rgba(216, 27, 96, 0.1); /* Sombra suave rosada */
             --transition: all 0.3s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; }
-
+        
         body {
             font-family: var(--font-body);
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-            overflow-x: hidden;
             padding-bottom: 80px;
-            background-image: radial-gradient(#F8BBD0 1px, transparent 1px);
-            background-size: 30px 30px;
         }
 
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         ul { list-style: none; }
-        img { max-width: 100%; display: block; }
+        img { display: block; max-width: 100%; }
+        button { border: none; outline: none; background: none; font-family: inherit; cursor: pointer; }
 
-        /* --- 2. HEADER --- */
+        /* --- 2. HEADER & MENÚ --- */
         header {
-            background: rgba(255, 255, 255, 0.98);
+            background: var(--header-bg);
             position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-            padding: 5px 0;
-        }
-
-        .navbar {
-            max-width: 1200px; margin: 0 auto; padding: 0 20px;
-            display: flex; justify-content: space-between; align-items: center;
             height: 70px;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid var(--border-color);
         }
 
+        .hamburger { font-size: 1.4rem; cursor: pointer; padding: 10px; }
+        
         .logo {
             font-family: var(--font-title);
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-color);
-            display: flex; align-items: center; gap: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
-        .logo img { height: 50px; width: 50px; object-fit: contain; border-radius: 50%; border: 1px solid var(--secondary-color); }
 
-        .nav-links { display: flex; gap: 30px; }
-        .nav-links a { font-weight: 600; font-size: 0.95rem; color: var(--text-main); letter-spacing: 0.5px; }
-        .nav-links a:hover { color: var(--primary-color); }
+        .header-icons { display: flex; gap: 15px; font-size: 1.2rem; }
 
-        .hamburger { display: none; font-size: 1.5rem; color: var(--primary-color); cursor: pointer; }
+        /* SIDEBAR */
+        .sidebar-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 2000;
+            opacity: 0; visibility: hidden; transition: var(--transition);
+            backdrop-filter: blur(2px);
+        }
+        .sidebar-overlay.active { opacity: 1; visibility: visible; }
 
-        /* --- 3. HERO (PORTADA) --- */
-        #hero {
+        .sidebar {
+            position: fixed; top: 0; left: 0; height: 100%;
+            width: 280px; background: #efafc4;
+            z-index: 2001;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex; flex-direction: column;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.05);
+        }
+        .sidebar.active { transform: translateX(0); }
+
+        .sidebar-header {
+            padding: 20px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .close-btn { font-size: 1.5rem; color: var(--text-light); }
+
+        .sidebar-menu { padding: 20px 0; overflow-y: auto; flex: 1; }
+        .sidebar-menu a {
+            display: block; padding: 15px 25px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+        .menu-item-content { display: flex; justify-content: space-between; align-items: center; }
+
+        /* BUSCADOR FIJO (CORREGIDO) */
+        #searchContainer {
+            display: none; 
+            position: fixed; /* Ahora es fijo */
+            top: 70px; /* Justo debajo del header */
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            background: #fff; 
+            padding: 15px; 
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown { from{transform: translateY(-10px); opacity:0;} to{transform: translateY(0); opacity:1;} }
+
+        /* --- 3. HERO SLIDER --- */
+        .hero-slider {
             position: relative;
-            background: linear-gradient(rgba(74, 14, 46, 0.3), rgba(74, 14, 46, 0.4)), url('https://wsrv.nl/?url=https://drive.google.com/uc?id=11_CYRq0kOhoDk-zcnge6Tyy2Ih4xbfUJ&w=1200&q=80');
-            background-size: cover; background-position: center;
-            /* Altura PC: 35% */
-            height: 35vh; 
-            display: flex; align-items: center; justify-content: center; text-align: center;
-            border-radius: 0 0 40px 40px;
-            margin-bottom: 30px;
-            box-shadow: var(--shadow);
-            color: white;
+            height: 60vh;
+            width: 100%;
+            overflow: hidden;
+            background: #000;
         }
-
-        .hero-content { z-index: 2; animation: fadeIn 1s ease; max-width: 800px; padding: 20px; }
-        .hero-title { 
-            font-family: var(--font-title); 
-            font-size: 3rem; 
-            margin-bottom: 10px; 
-            text-shadow: 0 4px 10px rgba(0,0,0,0.4);
-            line-height: 1.1;
-            font-style: italic;
+        
+        .slide {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0; transition: opacity 1.5s ease-in-out;
+            background-size: cover; background-position: center;
+        }
+        .slide.active { opacity: 1; }
+        
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.2); z-index: 10;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; color: white; padding: 20px;
+        }
+        .hero-title {
+            font-family: var(--font-title); font-size: 3rem; margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         .hero-btn {
-            background: white; color: var(--primary-color); padding: 10px 30px;
-            border-radius: 50px; font-weight: 700; display: inline-flex; 
-            align-items: center; gap: 10px; margin-top: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            font-size: 0.9rem; letter-spacing: 1px;
+            margin-top: 20px; padding: 12px 30px;
+            background: white; color: var(--text-main);
+            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            font-size: 0.8rem; border-radius: 2px;
+            transition: var(--transition);
+        }
+        .hero-btn:hover { background: var(--text-main); color: white; }
+
+        /* --- 4. CATALOGO --- */
+        .main-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        
+        .category-block { margin-bottom: 60px; }
+        .cat-title-wrap { 
+            text-align: center; margin-bottom: 30px; position: relative; 
+        }
+        .cat-title { 
+            font-family: var(--font-title); font-size: 2.2rem; color: var(--text-main); 
+            display: inline-block; padding: 0 20px; background: var(--bg-color); z-index: 2; position: relative;
+        }
+        .cat-title-wrap::after {
+            content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 1px;
+            background: #ddd; z-index: 1;
         }
 
-        /* --- 4. SECCIONES GENERALES --- */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .section-title { 
-            font-family: var(--font-title); 
-            font-size: 2.5rem; 
-            color: var(--primary-color); 
-            text-align: center; 
-            margin: 30px 0 20px; 
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .product-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
         }
 
-        /* --- 5. NOVEDADES (MODIFICADO) --- */
-        .featured-section { 
-            padding: 0 15px; 
-            margin: 20px auto;
-            /* Max width inicial (Móvil) */
-            max-width: 100%; 
+        .prod-card {
+            background: white; transition: var(--transition); cursor: pointer; position: relative;
         }
-        
-        #featuredGrid { 
-            display: flex; justify-content: center; 
+        .prod-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+
+        .prod-img-wrap {
+            width: 100%; padding-top: 120%; /* 4:5 vertical */
+            position: relative; overflow: hidden; background: #f0f0f0;
+        }
+        .prod-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; transition: transform 0.6s ease;
+        }
+        .prod-card:hover .prod-img { transform: scale(1.05); }
+
+        .prod-info { padding: 15px 10px; text-align: center; }
+        .prod-name { 
+            font-size: 0.95rem; font-weight: 400; color: var(--text-main); 
+            margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .prod-price { font-family: var(--font-title); font-size: 1.1rem; color: var(--text-light); }
+
+        .load-more-btn {
+            display: block; margin: 30px auto 0;
+            padding: 10px 40px; border: 1px solid var(--text-main);
+            color: var(--text-main); text-transform: uppercase; letter-spacing: 2px;
+            font-size: 0.8rem; font-weight: 700; transition: var(--transition);
+        }
+        .load-more-btn:hover { background: var(--text-main); color: white; }
+
+        /* --- 5. MODAL DETALLE --- */
+        .prod-modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 3000;
+            display: none; justify-content: center; align-items: center;
+            padding: 20px; backdrop-filter: blur(5px);
+        }
+        .prod-modal {
+            background: white; width: 100%; max-width: 900px;
+            max-height: 90vh; overflow-y: auto;
+            display: flex; flex-direction: column;
+            position: relative; animation: fadeInUp 0.4s ease;
+        }
+        @media (min-width: 768px) {
+            .prod-modal { flex-direction: row; height: auto; overflow: hidden; }
         }
 
-        .feat-dynamic-card {
-            display: flex;
-            align-items: center;
-            background: white;
-            border-radius: 20px;
-            padding: 15px; 
-            width: 100%;
-            box-shadow: 0 5px 20px rgba(216, 27, 96, 0.08);
-            border: 1px solid rgba(216, 27, 96, 0.1);
-            animation: fadeInFeat 0.5s ease-in-out;
-            max-width: 500px; /* Ancho maximo por defecto (móvil grande) */
-        }
-        @keyframes fadeInFeat { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-img-col { flex: 1; background: #eee; min-height: 300px; }
+        .modal-img { width: 100%; height: 100%; object-fit: cover; }
         
-        .feat-img {
-            /* Tamaño móvil ligeramente aumentado */
-            width: 150px; 
-            height: 150px;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-        
-        .feat-info {
-            padding-left: 20px;
-            display: flex; flex-direction: column; justify-content: center; flex: 1;
+        .modal-info-col { 
+            flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; 
             text-align: left;
         }
-        .feat-badge {
-            background: var(--gold); color: white; 
-            font-size: 0.7rem; padding: 3px 8px; border-radius: 6px; 
-            align-self: flex-start; margin-bottom: 5px; font-weight: 700; letter-spacing: 1px;
+        .modal-close {
+            position: absolute; top: 15px; right: 20px; font-size: 2rem; 
+            cursor: pointer; color: #333; z-index: 10; background: rgba(255,255,255,0.8);
+            width: 40px; height: 40px; text-align: center; border-radius: 50%;
         }
-
-        /* --- 6. CATÁLOGO --- */
-        .category-section { margin-bottom: 40px; position: relative; }
-        .category-header { 
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 15px; padding-bottom: 5px;
-            border-bottom: 1px solid var(--secondary-color);
-        }
-        .category-name { font-family: var(--font-title); font-size: 1.8rem; color: var(--text-main); }
         
-        .nav-arrow {
-            display: none; 
-            position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
-            background: white; border: 1px solid var(--primary-color); color: var(--primary-color);
-            width: 40px; height: 40px; border-radius: 50%; 
-            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-            transition: 0.3s; align-items: center; justify-content: center; font-size: 1rem;
-        }
-        .nav-arrow.left { left: -20px; }
-        .nav-arrow.right { right: -20px; }
-
-        .horizontal-scroll {
-            display: grid;
-            grid-template-rows: repeat(2, 1fr); /* 2 FILAS */
-            grid-auto-flow: column; 
-            gap: 15px;
-            overflow-x: auto;
-            padding: 10px 5px 20px 5px;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
-        }
-        .horizontal-scroll::-webkit-scrollbar { display: none; }
-
-        .card {
-            background: white; border-radius: var(--radius); overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition);
-            position: relative; border: 1px solid rgba(0,0,0,0.05);
-            display: flex; flex-direction: column;
-            scroll-snap-align: start;
-        }
-        .card.in-cart { border: 1px solid var(--primary-color); background: #FFF0F5; }
+        .modal-title { font-family: var(--font-title); font-size: 2.5rem; line-height: 1.1; margin-bottom: 15px; }
+        .modal-price { font-size: 1.5rem; color: var(--accent-color); margin-bottom: 20px; font-weight: 300; }
+        .modal-desc { color: #666; margin-bottom: 30px; line-height: 1.8; font-size: 0.95rem; white-space: pre-wrap; }
         
-        .card-img-wrap { position: relative; overflow: hidden; }
-        .card-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .card:hover .card-img { transform: scale(1.05); }
-        
-        .card-content { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; text-align: center; }
-        .card-title { font-weight: 600; color: var(--text-main); margin-bottom: 5px; font-size: 0.9rem; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .card-price { color: var(--primary-color); font-weight: 700; font-size: 1.1rem; }
-        .btn-add {
-            width: 100%; margin-top: auto; padding: 5px; 
-            border: 1px solid var(--primary-color); background: transparent; 
-            color: var(--primary-color); border-radius: 50px;
-            font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 0.8rem;
+        .modal-add-btn {
+            background: var(--text-main); color: white; border: none;
+            padding: 15px; width: 100%; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+            transition: var(--transition);
         }
-        .btn-add:hover { background: var(--primary-color); color: white; }
+        .modal-add-btn:hover { background: var(--accent-color); }
 
-        /* --- 7. NOSOTROS --- */
-        .about-section { background: white; padding: 60px 0; border-top: 1px solid #eee; margin-top: 40px; }
-        .about-container { display: flex; flex-direction: column; gap: 30px; align-items: center; max-width: 1000px; margin: 0 auto; }
-        .about-img { width: 100%; max-width: 400px; border-radius: 20px; box-shadow: 10px 10px 0px var(--secondary-color); }
-        .about-txt { text-align: center; }
-        .about-txt h2 { font-family: var(--font-title); font-size: 2.2rem; color: var(--primary-color); margin-bottom: 15px; }
+        @keyframes fadeInUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
 
-        /* --- 8. FOOTER --- */
-        footer { background: var(--text-main); color: var(--secondary-color); padding: 40px 20px; text-align: center; }
-        .social-btn { font-size: 1.5rem; margin: 0 10px; color: white; transition: 0.3s; }
-        .social-btn:hover { color: var(--primary-color); }
-
-        /* --- 9. FLOTANTES --- */
+        /* --- 6. NOSOTROS (RECUPERADO) --- */
+        .about-section { background: white; padding: 80px 0; border-top: 1px solid #eee; margin-top: 60px; }
+        .about-container { display: flex; flex-direction: column; gap: 40px; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         
-        /* Barra Carrito */
+        .about-img { 
+            width: 100%; max-width: 400px; 
+            border-radius: 4px; /* Borde más recto estilo Bloom */
+            box-shadow: 15px 15px 0px #F5E6EA; /* Sombra sutil rosa pastel */
+        }
+        
+        .about-txt { text-align: center; max-width: 600px; }
+        .about-txt h2 { font-family: var(--font-title); font-size: 2.5rem; color: var(--text-main); margin-bottom: 20px; }
+        .about-txt p { font-size: 1rem; color: #666; margin-bottom: 15px; }
+        
+        @media (min-width: 1024px) {
+            .about-container { flex-direction: row; text-align: left; gap: 80px; }
+            .about-txt { text-align: left; }
+        }
+
+        /* --- 7. FOOTER (RECUPERADO) --- */
+        footer { 
+            background: #111; color: #fff; 
+            padding: 60px 20px; text-align: center; 
+            font-family: var(--font-body);
+        }
+        .social-btn { font-size: 1.5rem; margin: 0 15px; color: #999; transition: 0.3s; }
+        .social-btn:hover { color: white; }
+
+        /* FLOTANTES */
         .cart-bar {
             position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
-            z-index: 2000; padding: 12px 20px;
+            background: white; border-top: 1px solid #eee;
+            z-index: 2000; padding: 15px 20px;
             display: flex; justify-content: space-between; align-items: center;
             transform: translateY(100%); transition: 0.4s;
-            border-top: 1px solid var(--secondary-color);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
         }
         .cart-bar.visible { transform: translateY(0); }
-        .whatsapp-btn {
-            background: var(--primary-color); color: white; padding: 8px 25px; border-radius: 30px;
-            text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 8px; border: none; font-size: 0.95rem; cursor: pointer;
-        }
-
-        /* Botón WhatsApp Flotante */
-        .wsp-fixed {
-            position: fixed; bottom: 30px; right: 20px; z-index: 2100;
-            background: #25D366; color: white; width: 55px; height: 55px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            text-decoration: none; transition: bottom 0.4s ease;
-            border: 2px solid white;
-        }
-        .wsp-fixed:hover { transform: scale(1.1); }
         
-        /* Clase para mover el botón arriba cuando sale el carrito */
+        .wsp-fixed {
+            position: fixed; bottom: 30px; right: 20px; z-index: 1999;
+            background: #25D366; color: white; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 32px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: bottom 0.4s ease;
+        }
         .wsp-fixed.shift-up { bottom: 100px; }
 
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .nav-links { display: none; position: absolute; top: 70px; left: 0; width: 100%; background: white; flex-direction: column; padding: 20px; box-shadow: 0 10px 10px rgba(0,0,0,0.05); text-align: center; }
-            .nav-links.active { display: flex; }
-            .hamburger { display: block; }
-            
-            /* HERO MÓVIL: 80% PANTALLA */
-            #hero { height: 80vh; border-radius: 0 0 30px 30px; } 
-            .hero-title { font-size: 3.5rem; }
-
-            /* CATÁLOGO MÓVIL: 2 PROD X FILA */
-            .card { width: 44vw; height: 250px; } 
-            .card-img-wrap { height: 150px; }
-            .card-title { font-size: 0.85rem; }
-            .horizontal-scroll { gap: 10px; }
-        }
-
-        @media (min-width: 1024px) {
-            .nav-arrow { display: flex; }
-            
-            /* HERO PC: 35% PANTALLA */
-            #hero { height: 35vh; }
-            
-            /* NOVEDADES EN PC: GRANDE Y DISTRIBUIDO */
-            .featured-section { max-width: 1100px; padding: 30px; }
-            .feat-dynamic-card { 
-                max-width: 100%; 
-                padding: 30px; 
-                gap: 50px; /* Separación generosa entre foto y texto */
-            }
-            .feat-img { 
-                /* FOTO MUY GRANDE */
-                width: 450px; 
-                height: 450px; 
-            }
-            .feat-info { 
-                justify-content: center; 
-            }
-            /* TEXTOS GRANDES EN PC */
-            .feat-dynamic-card .card-title { font-size: 2.5rem !important; margin-bottom: 20px !important; }
-            .feat-dynamic-card .card-price { font-size: 2rem !important; }
-            .feat-badge { font-size: 1rem; padding: 5px 15px; }
-
-            /* CATÁLOGO PC: 4 PROD X FILA */
-            .card { width: 270px; height: 380px; }
-            .card-img-wrap { height: 240px; }
-            .card-title { font-size: 1.1rem; }
-            
-            .about-container { flex-direction: row; text-align: left; gap: 60px; }
-            .about-txt { flex: 1; text-align: left; }
-            .about-img { flex: 1; height: 400px; object-fit: cover; }
-        }
-
         /* MODAL RULETA */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
-        .modal-box { background: white; border-radius: 30px; padding: 30px; text-align: center; position: relative; animation: popUp 0.3s; max-width: 350px; width: 90%; }
-        @keyframes popUp { from {transform: scale(0.8); opacity:0;} to {transform: scale(1); opacity:1;} }
-        .spin-btn { background: var(--primary-color); color: white; border: none; padding: 12px 40px; border-radius: 50px; font-weight: bold; margin-top: 20px; cursor: pointer; font-size: 1.1rem; }
-        #loader { text-align: center; padding: 50px; color: var(--primary-color); }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 5000; justify-content: center; align-items: center; }
+        .modal-box { background: white; padding: 30px; border-radius: 10px; text-align: center; width: 90%; max-width: 350px; position: relative; }
+        
+        #loader { text-align: center; margin-top: 50px; }
     </style>
 </head>
 <body>
 
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span style="font-family: var(--font-title); font-weight: 700;">MENÚ</span>
+            <div class="close-btn" onclick="toggleSidebar()">×</div>
+        </div>
+        <div class="sidebar-menu" id="sidebarMenuContent">
+            </div>
+        <div style="padding: 20px; text-align: center; border-top: 1px solid #eee;">
+            <p style="font-size: 0.8rem; color:#999;">Fiore Di Ale © 2026</p>
+        </div>
+    </div>
+
     <header>
-        <div class="navbar">
-            <a href="#" class="logo">
-                <img src="https://wsrv.nl/?url=https://drive.google.com/uc?id=1H7HHaMHmOaWKJy1NT7vnR5zLLTbMNLCG&mask=circle" alt="Logo">
-                Fiore Di Ale
-            </a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#catalogo">Colección</a></li>
-                <li><a href="#novedades">Novedades</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-            <div class="hamburger" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></div>
+        <div class="hamburger" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></div>
+        <a href="#" class="logo">Fiore Di Ale</a>
+        <div class="header-icons">
+            <i class="fa-solid fa-search" style="cursor: pointer;" onclick="document.getElementById('searchContainer').style.display = document.getElementById('searchContainer').style.display === 'none' ? 'block' : 'none'"></i>
         </div>
     </header>
 
-    <section id="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Díselo con <br> flores</h1>
-            <p style="font-size: 1.2rem; margin-bottom: 20px; font-weight: 400; letter-spacing: 1px;">Arreglos exclusivos en Lima Norte</p>
-            <a href="#catalogo" class="hero-btn">Ver Colección <i class="fa-solid fa-arrow-down"></i></a>
-        </div>
-    </section>
-
-    <div id="novedades" class="featured-section">
-        <h2 class="section-title">Novedades <i class="fa-solid fa-fire" style="color:var(--gold); font-size: 1.8rem;"></i></h2>
-        <div id="featuredGrid"></div>
+    <div id="searchContainer">
+        <input type="text" id="searchInput" placeholder="Buscar tulipanes, rosas..." onkeyup="searchGlobal()" 
+        style="width: 100%; padding: 12px; border: 1px solid #ddd; font-family: var(--font-body); background: #fafafa;">
     </div>
 
-    <section id="catalogo" class="container">
-        <h2 class="section-title">Nuestra Colección</h2>
+    <section class="hero-slider">
+        <div class="slide active" style="background-image: url('https://wsrv.nl/?url=https://drive.google.com/uc?id=11_CYRq0kOhoDk-zcnge6Tyy2Ih4xbfUJ&w=1400&q=80');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1562690868-60bbe7293e94?q=80&w=1400');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=1400');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1490750967868-58cb75069ed6?q=80&w=1400');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507290439931-a861b5a38200?q=80&w=1400');"></div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1596562095818-a6d10c0a969e?q=80&w=1400');"></div>
         
-        <div style="max-width: 500px; margin: 0 auto 40px; position: relative;">
-            <input type="text" id="searchInput" placeholder="Buscar tulipanes, rosas..." onkeyup="renderCatalog()" 
-                style="width: 100%; padding: 15px 25px; border-radius: 50px; border: 1px solid #ddd; outline: none; font-family: var(--font-body); font-size: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.03);">
-            <i class="fa-solid fa-search" style="position: absolute; right: 25px; top: 50%; transform: translateY(-50%); color: var(--text-light);"></i>
+        <div class="hero-overlay">
+            <h1 class="hero-title">Detalles que<br>Enamoran</h1>
+            <button class="hero-btn" onclick="document.querySelector('.main-container').scrollIntoView({behavior:'smooth'})">Ver Colección</button>
         </div>
-
-        <div id="loader"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><br><br>Cargando belleza...</div>
-        <div id="catalogContainer"></div>
     </section>
 
+    <div id="loader"><i class="fa-solid fa-spinner fa-spin fa-2x" style="color:var(--gold);"></i></div>
+    <div class="main-container" id="mainContainer">
+        </div>
+
     <section id="nosotros" class="about-section">
-        <div class="about-container container">
+        <div class="about-container">
             <div class="about-txt">
                 <h2>Pasión por los detalles</h2>
                 <p>En <strong>Fiore Di Ale</strong>, cada arreglo cuenta una historia. Utilizamos flores seleccionadas el mismo día para garantizar su frescura y duración.</p>
-                <p>Nos especializamos en tulipanes, rosas y boxes personalizados con peluches y chocolates. Tu satisfacción y la sonrisa de quien recibe el regalo es nuestra mayor motivación.</p>
+                <p>Nos especializamos en tulipanes, rosas y boxes personalizados. Tu satisfacción y la sonrisa de quien recibe el regalo es nuestra mayor motivación.</p>
+                <img src="https://wsrv.nl/?url=https://drive.google.com/uc?id=1H7HHaMHmOaWKJy1NT7vnR5zLLTbMNLCG&mask=circle" style="width: 80px; margin-top:20px; border:1px solid #eee; border-radius:50%;">
             </div>
             <img src="https://wsrv.nl/?url=https://drive.google.com/uc?id=12oRHbnzUv5-oIoCC17gA6bVdNIYFrfa8&w=600&q=80" class="about-img" alt="Dueña">
         </div>
     </section>
 
     <footer id="contacto">
-        <h3 style="font-family: var(--font-title); font-size: 2rem;">Fiore Di Ale</h3>
-        <p>Lima Norte - Comas, Carabayllo, Los Olivos</p>
+        <h3 style="font-family: var(--font-title); font-size: 2rem; margin-bottom:10px;">Fiore Di Ale</h3>
+        <p style="opacity: 0.7; margin-bottom: 20px;">Lima Norte - Comas, Carabayllo, Los Olivos</p>
         <div style="margin: 25px 0;">
             <a href="#" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
             <a href="#" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
             <a href="#" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
-        <p style="font-size: 0.8rem; opacity: 0.7;">© 2026 Fiore Di Ale. Todos los derechos reservados.</p>
+        <p style="font-size: 0.8rem; opacity: 0.5;">© 2026 Fiore Di Ale. Todos los derechos reservados.</p>
     </footer>
+
+    <div class="prod-modal-overlay" id="productModal" onclick="closeProductModal(event)">
+        <div class="prod-modal">
+            <div class="modal-close" onclick="closeProductModal(null)">×</div>
+            <div class="modal-img-col">
+                <img src="" id="modalImg" class="modal-img">
+            </div>
+            <div class="modal-info-col">
+                <h2 id="modalTitle" class="modal-title">Nombre Producto</h2>
+                <div id="modalPrice" class="modal-price">S/ 0.00</div>
+                <div id="modalDesc" class="modal-desc"></div>
+                <button class="modal-add-btn" id="modalAddBtn">AGREGAR AL CARRITO</button>
+            </div>
+        </div>
+    </div>
 
     <a href="https://wa.me/51977414678" target="_blank" class="wsp-fixed" id="wspBtn">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
     <div class="cart-bar" id="cartBar">
-        <div class="cart-summary">
-            <span id="cartCount" style="color:#666; font-size:0.9rem;">0 items</span><br>
-            <strong id="cartTotal" style="color:var(--text-main)">S/ 0.00</strong>
+        <div style="font-family: var(--font-body);">
+            <div style="font-size: 0.8rem; color:#666;" id="cartCount">0 items</div>
+            <div style="font-size: 1.1rem; font-weight: 700; color:var(--text-main);" id="cartTotal">S/ 0.00</div>
         </div>
-        <button onclick="checkoutWhatsApp()" class="whatsapp-btn">Pedir <i class="fa-brands fa-whatsapp"></i></button>
+        <button onclick="checkoutWhatsApp()" style="background: var(--text-main); color: white; padding: 10px 25px; border-radius: 50px; font-weight: 700; letter-spacing: 1px;">PEDIR</button>
     </div>
 
     <div class="modal-overlay" id="wheelModal">
         <div class="modal-box">
-            <div style="position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 1.5rem; color: #999;" onclick="document.getElementById('wheelModal').style.display='none'">×</div>
-            <h3 style="font-family: var(--font-title); color: var(--primary-color); font-size: 2rem;">¡Gira y Gana! 🎁</h3>
-            <div style="position: relative; width: 250px; height: 250px; margin: 20px auto;">
-                <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 25px solid var(--primary-color); z-index: 10;"></div>
-                <canvas id="wheelCanvas" width="250" height="250"></canvas>
-            </div>
-            <button class="spin-btn" id="spinBtn" onclick="spinWheel()">¡PROBAR SUERTE!</button>
-            <div id="wheelResult" style="margin-top: 15px; font-weight: bold; color: var(--text-main);"></div>
+            <div style="position:absolute; top:10px; right:15px; cursor:pointer;" onclick="document.getElementById('wheelModal').style.display='none'">×</div>
+            <h3 style="font-family: var(--font-title); color: var(--accent-color); margin-bottom:15px;">¡Sorpresa! 🎁</h3>
+            <canvas id="wheelCanvas" width="250" height="250" style="width:100%; height:auto;"></canvas>
+            <button id="spinBtn" onclick="spinWheel()" style="background: var(--accent-color); color: white; padding: 10px 30px; border-radius: 50px; margin-top: 15px; font-weight: bold;">GIRAR</button>
+            <div id="wheelResult" style="margin-top:10px; font-weight:bold;"></div>
         </div>
     </div>
 
@@ -424,31 +425,140 @@
         
         let products = [];
         let cart = [];
-        let featIndex = 0;
-        let featInterval;
+        let currentModalProductId = null;
 
         async function init() {
             try {
+                startHeroSlider();
                 const res = await fetch(SHEET_URL);
-                if(!res.ok) throw new Error("Error HTTP");
                 const text = await res.text();
-                products = parseCSV(text); 
+                products = parseCSV(text);
+                
                 document.getElementById('loader').style.display = 'none';
-                
-                renderFeatured(); 
-                renderCatalog();
-                
-                if(!localStorage.getItem('fiore_played_v20')) {
-                    setTimeout(() => { document.getElementById('wheelModal').style.display = 'flex'; drawWheel(); }, 2000);
+                renderSidebar();
+                renderCategories(); 
+
+                if(!localStorage.getItem('fiore_played_v3')) {
+                    setTimeout(() => { 
+                        document.getElementById('wheelModal').style.display = 'flex'; 
+                        drawWheel(); 
+                    }, 3000);
                 }
-            } catch (err) {
-                console.error(err);
-                document.getElementById('loader').innerHTML = '<p style="color:red">Error cargando catálogo.</p>';
-            }
+            } catch (err) { console.error(err); }
+        }
+
+        function parseCSV(csv) {
+            const rows = csv.split(/\r?\n/).slice(1);
+            return rows.map((row, index) => {
+                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(val => val.replace(/"/g, '').trim());
+                if(cols.length < 2) return null;
+                
+                // CORRECCIÓN: La descripción está en la columna 8 (índice 7)
+                return {
+                    id: parseInt(cols[0]) || index,
+                    name: cols[1],
+                    price: parseFloat(cols[2]) || 0,
+                    // INDICE 7 ES LA COLUMNA 8 (A,B,C,D,E,F,G,H)
+                    description: cols[7] || "Hermoso arreglo floral fresco y elegante.", 
+                    category: cols[4] || 'Varios',
+                    tag: cols[5],
+                    image: cols[6]
+                };
+            }).filter(p => p && p.price > 0);
+        }
+
+        function renderCategories() {
+            const container = document.getElementById('mainContainer');
+            container.innerHTML = '';
+            const categories = [...new Set(products.map(p => p.category))];
+
+            categories.forEach(cat => {
+                const catProds = products.filter(p => p.category === cat);
+                if(catProds.length === 0) return;
+
+                const section = document.createElement('div');
+                section.className = 'category-block';
+                section.id = 'cat-' + cat.replace(/\s+/g, '-');
+                
+                section.innerHTML = `
+                    <div class="cat-title-wrap"><h2 class="cat-title">${cat}</h2></div>
+                    <div class="product-grid" id="grid-${cat.replace(/\s+/g, '-')}">
+                        ${catProds.map((p, index) => `
+                            <div class="prod-card ${index >= 4 ? 'hidden-item' : ''}" 
+                                 style="${index >= 4 ? 'display:none;' : ''}" 
+                                 onclick="openProductDetail(${p.id})">
+                                <div class="prod-img-wrap">
+                                    <img src="${fixUrl(p.image)}" class="prod-img" loading="lazy">
+                                    ${p.tag ? `<span style="position:absolute;top:10px;left:10px;background:var(--text-main);color:white;padding:2px 8px;font-size:0.6rem;letter-spacing:1px;">${p.tag}</span>` : ''}
+                                </div>
+                                <div class="prod-info">
+                                    <div class="prod-name">${p.name}</div>
+                                    <div class="prod-price">S/ ${p.price.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${catProds.length > 4 ? `<button class="load-more-btn" onclick="showAll('${cat.replace(/\s+/g, '-')}', this)">VER MÁS DE ${cat.toUpperCase()}</button>` : ''}
+                `;
+                container.appendChild(section);
+            });
+        }
+
+        function showAll(catId, btn) {
+            const grid = document.getElementById('grid-' + catId);
+            const hiddenItems = grid.querySelectorAll('.hidden-item');
+            hiddenItems.forEach(item => item.style.display = 'block');
+            btn.style.display = 'none'; 
+        }
+
+        function openProductDetail(id) {
+            const p = products.find(x => x.id === id);
+            if(!p) return;
+
+            currentModalProductId = p.id;
+            document.getElementById('modalImg').src = fixUrl(p.image);
+            document.getElementById('modalTitle').innerText = p.name;
+            document.getElementById('modalPrice').innerText = `S/ ${p.price.toFixed(2)}`;
+            document.getElementById('modalDesc').innerText = p.description;
+            
+            const btn = document.getElementById('modalAddBtn');
+            const inCart = cart.find(x => x.id === id);
+            btn.innerText = inCart ? "YA ESTÁ EN EL CARRITO" : "AGREGAR AL CARRITO";
+            btn.onclick = () => { addToCart(p.id); closeProductModal(null); };
+
+            document.getElementById('productModal').style.display = 'flex';
+        }
+
+        function closeProductModal(e) {
+            if(e && e.target !== e.currentTarget) return;
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        function renderSidebar() {
+            const menu = document.getElementById('sidebarMenuContent');
+            const categories = [...new Set(products.map(p => p.category))];
+            
+            let html = `<a href="#" onclick="toggleSidebar(); window.scrollTo(0,0);">INICIO</a>`;
+            categories.forEach(cat => {
+                html += `<a href="#cat-${cat.replace(/\s+/g, '-')}" onclick="toggleSidebar()">
+                            <div class="menu-item-content">
+                                <span>${cat}</span>
+                                <i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:#ccc;"></i>
+                            </div>
+                         </a>`;
+            });
+            html += `<a href="#nosotros" onclick="toggleSidebar()">NOSOTROS</a>`;
+            html += `<a href="#contacto" onclick="toggleSidebar()">CONTACTO</a>`;
+            menu.innerHTML = html;
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
         }
 
         function fixUrl(u) {
-            if(!u) return 'https://via.placeholder.com/300?text=Fiore';
+            if(!u) return 'https://via.placeholder.com/400x500?text=Fiore';
             let id = '';
             if (u.includes('/file/d/')) id = u.split('/file/d/')[1].split(/[/?]/)[0];
             else if (u.includes('id=')) id = u.split('id=')[1].split('&')[0];
@@ -456,97 +566,25 @@
             return `https://wsrv.nl/?url=${encodeURIComponent(u)}&w=600`;
         }
 
-        function parseCSV(csv) {
-            const rows = csv.split(/\r?\n/);
-            return rows.slice(1).map((row, index) => {
-                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                const clean = (val) => val ? val.replace(/"/g, '').trim() : '';
-                const id = clean(cols[0]); const name = clean(cols[1]); const price = clean(cols[2]); const category = clean(cols[4]); const tag = clean(cols[5]); const image = clean(cols[6]);
-                if (!name || !price) return null;
-                return { id: parseInt(id) || index, name, price: parseFloat(price) || 0, category: category || 'Varios', image, tag };
-            }).filter(p => p && p.price > 0);
+        function startHeroSlider() {
+            const slides = document.querySelectorAll('.slide');
+            let idx = 0;
+            setInterval(() => {
+                slides[idx].classList.remove('active');
+                idx = (idx + 1) % slides.length;
+                slides[idx].classList.add('active');
+            }, 4000);
+        }
+        
+        function addToCart(id) {
+            const p = products.find(x => x.id === id);
+            if(!cart.find(x => x.id === id)) {
+                cart.push({...p, isPrize:false});
+                updateCartUI();
+            }
         }
 
-        /* --- LOGICA NOVEDADES (Ajustada a la foto) --- */
-        function renderFeatured() {
-            const feats = products.slice(-3).reverse(); 
-            const box = document.getElementById('featuredGrid');
-            
-            const rotate = () => {
-                const p = feats[featIndex];
-                /* Se agregan estilos inline dinámicos para garantizar el tamaño en PC */
-                box.innerHTML = `
-                    <div class="feat-dynamic-card" onclick="toggleCart(${p.id})">
-                        <img src="${fixUrl(p.image)}" class="feat-img">
-                        <div class="feat-info">
-                            <span class="feat-badge">NUEVO 🔥</span>
-                            <div class="card-title" style="font-family: var(--font-body); font-size:1.1rem; margin-bottom:5px;">${p.name}</div>
-                            <div class="card-price" style="font-size:1.2rem;">S/ ${p.price.toFixed(2)}</div>
-                            <small style="color:#999; margin-top:5px; font-size:0.75rem;">Toca para agregar</small>
-                        </div>
-                    </div>
-                `;
-                featIndex = (featIndex + 1) % feats.length;
-            };
-            rotate();
-            clearInterval(featInterval);
-            featInterval = setInterval(rotate, 3000);
-        }
-
-        function renderCatalog() {
-            const term = document.getElementById('searchInput').value.toLowerCase();
-            const container = document.getElementById('catalogContainer');
-            container.innerHTML = ''; 
-            const categories = [...new Set(products.map(p => p.category).filter(c => c))];
-            let foundAny = false;
-
-            categories.forEach(cat => {
-                const catProds = products.filter(p => p.category === cat && p.name.toLowerCase().includes(term));
-                if (catProds.length > 0) {
-                    foundAny = true;
-                    const scrollId = `scroll-${cat.replace(/\s+/g, '-')}`;
-                    container.innerHTML += `
-                        <div class="category-section">
-                            <div class="category-header"><h3 class="category-name">${cat}</h3></div>
-                            <button class="nav-arrow left" onclick="scrollCat('${scrollId}', -1)"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button class="nav-arrow right" onclick="scrollCat('${scrollId}', 1)"><i class="fa-solid fa-chevron-right"></i></button>
-                            <div class="horizontal-scroll" id="${scrollId}">
-                                ${catProds.map(p => {
-                                    const inCart = cart.find(x => x.id === p.id);
-                                    return `
-                                    <div class="card ${inCart ? 'in-cart' : ''}" onclick="toggleCart(${p.id})">
-                                        <div class="card-img-wrap">
-                                            <img src="${fixUrl(p.image)}" class="card-img" loading="lazy">
-                                            ${p.tag ? `<span style="position:absolute;top:10px;left:10px;background:var(--primary-color);color:white;padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:bold;">${p.tag}</span>` : ''}
-                                        </div>
-                                        <div class="card-content">
-                                            <div class="card-title">${p.name}</div>
-                                            <div class="card-price">S/ ${p.price.toFixed(2)}</div>
-                                            <button class="btn-add">${inCart ? 'AGREGADO' : 'AGREGAR'}</button>
-                                        </div>
-                                    </div>`;
-                                }).join('')}
-                            </div>
-                        </div>
-                    `;
-                }
-            });
-            if (!foundAny) container.innerHTML = '<p style="text-align:center;">No se encontraron productos 🌸</p>';
-        }
-
-        function scrollCat(id, direction) {
-            const container = document.getElementById(id);
-            if (container) container.scrollBy({ left: direction * 400, behavior: 'smooth' });
-        }
-
-        function toggleCart(id) {
-            const idx = cart.findIndex(p => p.id === id);
-            if (idx > -1 && !cart[idx].isPrize) cart.splice(idx, 1);
-            else { const p = products.find(x => x.id === id); if (p) cart.push({...p, isPrize: false}); }
-            updateCart(); renderCatalog(); 
-        }
-
-        function updateCart() {
+        function updateCartUI() {
             const total = cart.reduce((sum, i) => sum + (i.price || 0), 0);
             document.getElementById('cartCount').innerText = `${cart.length} items`;
             document.getElementById('cartTotal').innerText = `S/ ${total.toFixed(2)}`;
@@ -556,10 +594,10 @@
             
             if (cart.length > 0) {
                 bar.classList.add('visible');
-                wsp.classList.add('shift-up'); // Mover WSP arriba
+                wsp.classList.add('shift-up');
             } else {
                 bar.classList.remove('visible');
-                wsp.classList.remove('shift-up'); // WSP regresa abajo
+                wsp.classList.remove('shift-up');
             }
         }
 
@@ -574,6 +612,24 @@
             msg += `\n*TOTAL: S/${sub.toFixed(2)}*`;
             window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
         }
+        
+        function searchGlobal() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            const allCards = document.querySelectorAll('.prod-card');
+            
+            if(term === '') { renderCategories(); return; }
+
+            allCards.forEach(card => {
+                const name = card.querySelector('.prod-name').innerText.toLowerCase();
+                if(name.includes(term)) {
+                    card.style.display = 'block';
+                    card.classList.remove('hidden-item');
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            document.querySelectorAll('.load-more-btn').forEach(b => b.style.display = 'none');
+        }
 
         const prizes = ['Envío Gratis', 'Dedicatoria', 'Bombones', 'Girasol', '5% OFF', 'Globo'];
         const colors = ['#FFF0F5', '#F8BBD0', '#FFF0F5', '#F8BBD0', '#FFF0F5', '#F8BBD0']; 
@@ -586,7 +642,7 @@
                 const a = ang + i*arc;
                 ctx.beginPath(); ctx.fillStyle=colors[i]; ctx.moveTo(125,125); ctx.arc(125,125,125,a,a+arc); ctx.fill(); ctx.stroke();
                 ctx.save(); ctx.translate(125+Math.cos(a+arc/2)*80, 125+Math.sin(a+arc/2)*80); 
-                ctx.rotate(a+arc/2+Math.PI/2); ctx.fillStyle='#C2185B'; ctx.font='bold 12px Quicksand'; 
+                ctx.rotate(a+arc/2+Math.PI/2); ctx.fillStyle='#C2185B'; ctx.font='bold 12px Arial'; 
                 ctx.fillText(p, -ctx.measureText(p).width/2, 0); ctx.restore();
             });
         }
@@ -598,7 +654,7 @@
                     const win = prizes[Math.floor(Math.random()*prizes.length)];
                     document.getElementById('wheelResult').innerText = `¡Ganaste: ${win}!`;
                     cart.push({id:999, name:`Premio: ${win}`, price:0, isPrize:true});
-                    updateCart(); localStorage.setItem('fiore_played_v20','true');
+                    updateCartUI(); localStorage.setItem('fiore_played_v3','true');
                     setTimeout(()=>document.getElementById('wheelModal').style.display='none', 2500); return;
                 }
                 a += v; v *= 0.985; drawWheel(a); requestAnimationFrame(tick);
@@ -606,7 +662,6 @@
             tick();
         }
 
-        function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
         init();
     </script>
 </body>
