@@ -15,21 +15,21 @@
     <link rel="icon" href="https://wsrv.nl/?url=https://drive.google.com/uc?id=1H7HHaMHmOaWKJy1NT7vnR5zLLTbMNLCG&mask=circle">
     
     <style>
-        /* --- 1. ESTÉTICA BLOOM (Minimalista & Cream) --- */
+        /* --- 1. CONFIGURACIÓN GENERAL --- */
         :root {
-            --bg-color: #ffeffc;       /* FONDO BLANCO PURO */
-            --header-bg: #FFFFFF;      /* Cabecera Blanca */
-            --text-main: #1A1A1A;      /* Texto Negro/Gris oscuro */
-            --text-light: #666666;
-            --accent-color: #D81B60;   /* Color Principal: ROSA INTENSO */
+            --bg-color: #FAFAFA;       /* Fondo general muy suave */
+            --header-bg: #FFFFFF;
+            --text-main: #333333;
+            --text-light: #777777;
+            --accent-color: #D32F2F;   /* Rojo/Rosa intenso estilo Bloom/Alore */
+            --accent-soft: #ffeffc;
             --gold: #C5A059;
-            --border-color: #F8BBD0;   /* Líneas y bordes: ROSA PASTEL */
+            --border-radius-card: 16px; /* Borde redondeado estilo Alore */
             
             --font-title: 'Playfair Display', serif;
             --font-body: 'Lato', sans-serif;
             
-            --radius: 4px;
-            --shadow: 0 4px 20px rgba(216, 27, 96, 0.1); /* Sombra suave rosada */
+            --shadow-soft: 0 10px 30px rgba(0,0,0,0.05);
             --transition: all 0.3s ease;
         }
 
@@ -55,83 +55,84 @@
             height: 70px;
             display: flex; align-items: center; justify-content: space-between;
             padding: 0 20px;
-            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
         }
 
-        .hamburger { font-size: 1.4rem; cursor: pointer; padding: 10px; }
+        .hamburger { font-size: 1.4rem; cursor: pointer; padding: 10px; color: var(--text-main); }
         
         .logo {
             font-family: var(--font-title);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--accent-color); /* Logo en color destacado */
         }
 
-        .header-icons { display: flex; gap: 15px; font-size: 1.2rem; }
+        .header-icons { display: flex; gap: 18px; font-size: 1.3rem; color: var(--text-main); }
 
         /* SIDEBAR */
         .sidebar-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.5); z-index: 2000;
             opacity: 0; visibility: hidden; transition: var(--transition);
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(3px);
         }
         .sidebar-overlay.active { opacity: 1; visibility: visible; }
 
         .sidebar {
             position: fixed; top: 0; left: 0; height: 100%;
-            width: 280px; background: #efafc4;
+            width: 280px; background: #fff;
             z-index: 2001;
             transform: translateX(-100%);
             transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             display: flex; flex-direction: column;
-            box-shadow: 2px 0 15px rgba(0,0,0,0.05);
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
         }
         .sidebar.active { transform: translateX(0); }
 
         .sidebar-header {
-            padding: 20px; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 25px; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #f0f0f0;
         }
-        .close-btn { font-size: 1.5rem; color: var(--text-light); }
+        .close-btn { font-size: 1.8rem; color: var(--text-main); line-height: 1; }
 
-        .sidebar-menu { padding: 20px 0; overflow-y: auto; flex: 1; }
+        .sidebar-menu { padding: 10px 0; overflow-y: auto; flex: 1; }
         .sidebar-menu a {
-            display: block; padding: 15px 25px;
+            display: block; padding: 18px 30px;
             font-family: var(--font-body);
-            font-weight: 700;
-            font-size: 0.9rem;
+            font-weight: 600;
+            font-size: 0.95rem;
             color: var(--text-main);
             letter-spacing: 1px;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(0,0,0,0.03);
+            border-bottom: 1px solid #fafafa;
         }
         .menu-item-content { display: flex; justify-content: space-between; align-items: center; }
 
-        /* BUSCADOR FIJO (CORREGIDO) */
+        /* BUSCADOR */
         #searchContainer {
             display: none; 
-            position: fixed; /* Ahora es fijo */
-            top: 70px; /* Justo debajo del header */
-            left: 0;
-            width: 100%;
-            z-index: 999;
+            position: fixed; top: 70px; left: 0;
+            width: 100%; z-index: 999;
             background: #fff; 
             padding: 15px; 
-            border-bottom: 1px solid #eee;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             animation: slideDown 0.3s ease;
+        }
+        #searchInput {
+            width: 100%; padding: 12px 20px; 
+            border: 1px solid #eee; border-radius: 50px; 
+            font-family: var(--font-body); background: #f9f9f9; outline: none;
         }
         @keyframes slideDown { from{transform: translateY(-10px); opacity:0;} to{transform: translateY(0); opacity:1;} }
 
         /* --- 3. HERO SLIDER --- */
         .hero-slider {
             position: relative;
-            height: 60vh;
+            height: 65vh; /* Un poco más alto */
             width: 100%;
             overflow: hidden;
-            background: #000;
+            background: #f0f0f0;
         }
         
         .slide {
@@ -143,37 +144,38 @@
         
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.2); z-index: 10;
+            background: rgba(0,0,0,0.25); z-index: 10;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; color: white; padding: 20px;
         }
         .hero-title {
-            font-family: var(--font-title); font-size: 3rem; margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            font-family: var(--font-title); font-size: 3.5rem; margin-bottom: 15px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.4); font-style: italic;
         }
         .hero-btn {
-            margin-top: 20px; padding: 12px 30px;
+            margin-top: 25px; padding: 14px 35px;
             background: white; color: var(--text-main);
             font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
-            font-size: 0.8rem; border-radius: 2px;
+            font-size: 0.8rem; border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: var(--transition);
         }
-        .hero-btn:hover { background: var(--text-main); color: white; }
+        .hero-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
 
-        /* --- 4. CATALOGO --- */
-        .main-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        /* --- 4. CATÁLOGO ESTILO ALORE --- */
+        .main-container { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
         
-        .category-block { margin-bottom: 60px; }
+        .category-block { margin-bottom: 70px; }
         .cat-title-wrap { 
-            text-align: center; margin-bottom: 30px; position: relative; 
+            text-align: center; margin-bottom: 40px; position: relative; 
         }
         .cat-title { 
-            font-family: var(--font-title); font-size: 2.2rem; color: var(--text-main); 
-            display: inline-block; padding: 0 20px; background: var(--bg-color); z-index: 2; position: relative;
+            font-family: var(--font-title); font-size: 2.5rem; color: var(--text-main); 
+            display: inline-block; padding: 0 25px; background: var(--bg-color); z-index: 2; position: relative;
         }
         .cat-title-wrap::after {
             content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 1px;
-            background: #ddd; z-index: 1;
+            background: #e0e0e0; z-index: 1;
         }
 
         .product-grid {
@@ -185,106 +187,186 @@
             .product-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
         }
 
+        /* TARJETA DE PRODUCTO - ESTILO ALORE */
         .prod-card {
-            background: white; transition: var(--transition); cursor: pointer; position: relative;
+            background: white; 
+            border-radius: var(--border-radius-card); 
+            transition: var(--transition); 
+            cursor: pointer; 
+            position: relative;
+            overflow: hidden; /* Para que el borde redondeado corte la imagen */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03); /* Sombra muy sutil */
         }
-        .prod-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+        .prod-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08); 
+        }
 
         .prod-img-wrap {
-            width: 100%; padding-top: 120%; /* 4:5 vertical */
-            position: relative; overflow: hidden; background: #f0f0f0;
+            width: 100%; padding-top: 125%; /* Formato 4:5 (más vertical) */
+            position: relative; overflow: hidden; background: #f8f8f8;
         }
         .prod-img {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; transition: transform 0.6s ease;
+            object-fit: cover; transition: transform 0.8s ease;
         }
-        .prod-card:hover .prod-img { transform: scale(1.05); }
+        .prod-card:hover .prod-img { transform: scale(1.08); }
 
-        .prod-info { padding: 15px 10px; text-align: center; }
-        .prod-name { 
-            font-size: 0.95rem; font-weight: 400; color: var(--text-main); 
-            margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px;
+        /* BADGES FLOTANTES (Descuento y Corazón) */
+        .badge-discount {
+            position: absolute; top: 15px; left: 0;
+            background: #E57373; /* Color Salmón/Rojo Alore */
+            color: white;
+            padding: 5px 12px;
+            font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+            border-radius: 0 4px 4px 0;
+            z-index: 5;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
-        .prod-price { font-family: var(--font-title); font-size: 1.1rem; color: var(--text-light); }
+        
+        .badge-heart {
+            position: absolute; top: 15px; right: 15px;
+            width: 35px; height: 35px;
+            background: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #ccc; z-index: 5;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        .badge-heart:hover { color: var(--accent-color); transform: scale(1.1); }
+        .badge-heart i { font-size: 1.1rem; margin-top: 1px; }
+
+        .prod-info { padding: 18px 15px; text-align: center; }
+        
+        .prod-name { 
+            font-family: var(--font-title); /* Fuente Serif elegante */
+            font-size: 1.1rem; 
+            font-weight: 600; 
+            color: #1a1a1a; 
+            margin-bottom: 8px; 
+            line-height: 1.2;
+        }
+        
+        .prod-price { 
+            font-family: var(--font-body); 
+            font-size: 1.1rem; 
+            color: var(--accent-color); /* Precio en rojo/rosa */
+            font-weight: 700; 
+        }
+        .prod-price-old {
+            font-size: 0.9rem; color: #999; text-decoration: line-through; margin-left: 8px; font-weight: 400;
+        }
 
         .load-more-btn {
-            display: block; margin: 30px auto 0;
-            padding: 10px 40px; border: 1px solid var(--text-main);
+            display: block; margin: 40px auto 0;
+            padding: 12px 50px; border: 1px solid var(--text-main);
             color: var(--text-main); text-transform: uppercase; letter-spacing: 2px;
-            font-size: 0.8rem; font-weight: 700; transition: var(--transition);
+            font-size: 0.8rem; font-weight: 700; transition: var(--transition); border-radius: 50px;
         }
         .load-more-btn:hover { background: var(--text-main); color: white; }
 
-        /* --- 5. MODAL DETALLE --- */
+        /* --- 5. MODAL DETALLE - ESTILO BLOOM --- */
         .prod-modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); z-index: 3000;
+            background: rgba(0,0,0,0.7); z-index: 3000;
             display: none; justify-content: center; align-items: center;
-            padding: 20px; backdrop-filter: blur(5px);
+            padding: 0; backdrop-filter: blur(5px);
         }
+        
+        /* Modal estilo Bloom: Imagen arriba, texto abajo limpio */
         .prod-modal {
-            background: white; width: 100%; max-width: 900px;
-            max-height: 90vh; overflow-y: auto;
+            background: white; width: 100%; height: 100%; 
+            overflow-y: auto;
             display: flex; flex-direction: column;
             position: relative; animation: fadeInUp 0.4s ease;
         }
         @media (min-width: 768px) {
-            .prod-modal { flex-direction: row; height: auto; overflow: hidden; }
+            .prod-modal { 
+                width: 900px; height: auto; max-height: 90vh; 
+                flex-direction: row; border-radius: 10px; overflow: hidden;
+            }
         }
 
-        .modal-img-col { flex: 1; background: #eee; min-height: 300px; }
+        .modal-img-col { 
+            flex: 1.2; 
+            background: white; /* Bloom usa fondo limpio */
+            min-height: 400px; 
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+        }
         .modal-img { width: 100%; height: 100%; object-fit: cover; }
         
         .modal-info-col { 
-            flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; 
-            text-align: left;
-        }
-        .modal-close {
-            position: absolute; top: 15px; right: 20px; font-size: 2rem; 
-            cursor: pointer; color: #333; z-index: 10; background: rgba(255,255,255,0.8);
-            width: 40px; height: 40px; text-align: center; border-radius: 50%;
+            flex: 1; padding: 40px 30px; 
+            display: flex; flex-direction: column; 
+            justify-content: center; 
+            text-align: center; /* Centrado como en referencia */
+            background: #fff;
         }
         
-        .modal-title { font-family: var(--font-title); font-size: 2.5rem; line-height: 1.1; margin-bottom: 15px; }
-        .modal-price { font-size: 1.5rem; color: var(--accent-color); margin-bottom: 20px; font-weight: 300; }
-        .modal-desc { color: #666; margin-bottom: 30px; line-height: 1.8; font-size: 0.95rem; white-space: pre-wrap; }
+        .modal-close {
+            position: absolute; top: 20px; right: 20px; font-size: 2rem; 
+            cursor: pointer; color: #333; z-index: 20; 
+            background: white; width: 45px; height: 45px; 
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .modal-title { 
+            font-family: var(--font-body); /* Bloom usa Sans Serif Bold */
+            font-size: 1.8rem; 
+            line-height: 1.2; 
+            margin-bottom: 10px; 
+            text-transform: uppercase; 
+            font-weight: 800;
+            color: #000;
+        }
+        
+        .modal-price { 
+            font-size: 1.8rem; 
+            color: #D32F2F; /* Rojo intenso Bloom */
+            margin-bottom: 25px; 
+            font-weight: 700; 
+            font-family: var(--font-body);
+        }
+        
+        .modal-desc { 
+            color: #555; 
+            margin-bottom: 35px; 
+            line-height: 1.8; 
+            font-size: 1rem; 
+            white-space: pre-wrap; 
+            padding: 0 10px;
+        }
         
         .modal-add-btn {
-            background: var(--text-main); color: white; border: none;
-            padding: 15px; width: 100%; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-            transition: var(--transition);
+            background: #111; color: white; border: none;
+            padding: 18px; width: 100%; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+            transition: var(--transition); border-radius: 4px; font-size: 1rem;
         }
         .modal-add-btn:hover { background: var(--accent-color); }
 
-        @keyframes fadeInUp { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+        @keyframes fadeInUp { from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
 
-        /* --- 6. NOSOTROS (RECUPERADO) --- */
-        .about-section { background: white; padding: 80px 0; border-top: 1px solid #eee; margin-top: 60px; }
+        /* --- 6. OTROS --- */
+        .about-section { background: white; padding: 80px 0; border-top: 1px solid #f5f5f5; margin-top: 60px; }
         .about-container { display: flex; flex-direction: column; gap: 40px; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        
-        .about-img { 
-            width: 100%; max-width: 400px; 
-            border-radius: 4px; /* Borde más recto estilo Bloom */
-            box-shadow: 15px 15px 0px #F5E6EA; /* Sombra sutil rosa pastel */
-        }
-        
+        .about-img { width: 100%; max-width: 400px; border-radius: 20px; box-shadow: 15px 15px 0px #FCE4EC; }
         .about-txt { text-align: center; max-width: 600px; }
-        .about-txt h2 { font-family: var(--font-title); font-size: 2.5rem; color: var(--text-main); margin-bottom: 20px; }
-        .about-txt p { font-size: 1rem; color: #666; margin-bottom: 15px; }
-        
+        .about-txt h2 { font-family: var(--font-title); font-size: 2.5rem; margin-bottom: 20px; }
         @media (min-width: 1024px) {
             .about-container { flex-direction: row; text-align: left; gap: 80px; }
             .about-txt { text-align: left; }
         }
 
-        /* --- 7. FOOTER (RECUPERADO) --- */
         footer { 
             background: #111; color: #fff; 
             padding: 60px 20px; text-align: center; 
             font-family: var(--font-body);
         }
         .social-btn { font-size: 1.5rem; margin: 0 15px; color: #999; transition: 0.3s; }
-        .social-btn:hover { color: white; }
+        .social-btn:hover { color: white; transform: scale(1.2); }
 
         /* FLOTANTES */
         .cart-bar {
@@ -293,7 +375,7 @@
             z-index: 2000; padding: 15px 20px;
             display: flex; justify-content: space-between; align-items: center;
             transform: translateY(100%); transition: 0.4s;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
         }
         .cart-bar.visible { transform: translateY(0); }
         
@@ -301,16 +383,17 @@
             position: fixed; bottom: 30px; right: 20px; z-index: 1999;
             background: #25D366; color: white; width: 60px; height: 60px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 32px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: bottom 0.4s ease;
+            font-size: 32px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: bottom 0.4s ease, transform 0.3s;
         }
+        .wsp-fixed:hover { transform: scale(1.1); }
         .wsp-fixed.shift-up { bottom: 100px; }
 
         /* MODAL RULETA */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 5000; justify-content: center; align-items: center; }
-        .modal-box { background: white; padding: 30px; border-radius: 10px; text-align: center; width: 90%; max-width: 350px; position: relative; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(2px); }
+        .modal-box { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 90%; max-width: 350px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         
-        #loader { text-align: center; margin-top: 50px; }
+        #loader { text-align: center; margin-top: 100px; }
     </style>
 </head>
 <body>
@@ -318,7 +401,7 @@
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <span style="font-family: var(--font-title); font-weight: 700;">MENÚ</span>
+            <span style="font-family: var(--font-title); font-weight: 700; font-size: 1.2rem;">MENÚ</span>
             <div class="close-btn" onclick="toggleSidebar()">×</div>
         </div>
         <div class="sidebar-menu" id="sidebarMenuContent">
@@ -332,30 +415,26 @@
         <div class="hamburger" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></div>
         <a href="#" class="logo">Fiore Di Ale</a>
         <div class="header-icons">
-            <i class="fa-solid fa-search" style="cursor: pointer;" onclick="document.getElementById('searchContainer').style.display = document.getElementById('searchContainer').style.display === 'none' ? 'block' : 'none'"></i>
+            <i class="fa-solid fa-search" style="cursor: pointer;" onclick="document.getElementById('searchContainer').style.display = document.getElementById('searchContainer').style.display === 'none' ? 'block' : 'none'; if(document.getElementById('searchContainer').style.display === 'block') document.getElementById('searchInput').focus();"></i>
         </div>
     </header>
 
     <div id="searchContainer">
-        <input type="text" id="searchInput" placeholder="Buscar tulipanes, rosas..." onkeyup="searchGlobal()" 
-        style="width: 100%; padding: 12px; border: 1px solid #ddd; font-family: var(--font-body); background: #fafafa;">
+        <input type="text" id="searchInput" placeholder="Buscar tulipanes, rosas..." onkeyup="searchGlobal()">
     </div>
 
     <section class="hero-slider">
         <div class="slide active" style="background-image: url('https://wsrv.nl/?url=https://drive.google.com/uc?id=11_CYRq0kOhoDk-zcnge6Tyy2Ih4xbfUJ&w=1400&q=80');"></div>
         <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1562690868-60bbe7293e94?q=80&w=1400');"></div>
         <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=1400');"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1490750967868-58cb75069ed6?q=80&w=1400');"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1507290439931-a861b5a38200?q=80&w=1400');"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1596562095818-a6d10c0a969e?q=80&w=1400');"></div>
-        
         <div class="hero-overlay">
             <h1 class="hero-title">Detalles que<br>Enamoran</h1>
             <button class="hero-btn" onclick="document.querySelector('.main-container').scrollIntoView({behavior:'smooth'})">Ver Colección</button>
         </div>
     </section>
 
-    <div id="loader"><i class="fa-solid fa-spinner fa-spin fa-2x" style="color:var(--gold);"></i></div>
+    <div id="loader"><i class="fa-solid fa-spinner fa-spin fa-3x" style="color:var(--gold);"></i></div>
+    
     <div class="main-container" id="mainContainer">
         </div>
 
@@ -385,13 +464,15 @@
     <div class="prod-modal-overlay" id="productModal" onclick="closeProductModal(event)">
         <div class="prod-modal">
             <div class="modal-close" onclick="closeProductModal(null)">×</div>
+            
             <div class="modal-img-col">
                 <img src="" id="modalImg" class="modal-img">
             </div>
+            
             <div class="modal-info-col">
-                <h2 id="modalTitle" class="modal-title">Nombre Producto</h2>
+                <h2 id="modalTitle" class="modal-title">NOMBRE PRODUCTO</h2>
                 <div id="modalPrice" class="modal-price">S/ 0.00</div>
-                <div id="modalDesc" class="modal-desc"></div>
+                <div id="modalDesc" class="modal-desc">Descripción del producto aquí.</div>
                 <button class="modal-add-btn" id="modalAddBtn">AGREGAR AL CARRITO</button>
             </div>
         </div>
@@ -403,10 +484,10 @@
 
     <div class="cart-bar" id="cartBar">
         <div style="font-family: var(--font-body);">
-            <div style="font-size: 0.8rem; color:#666;" id="cartCount">0 items</div>
-            <div style="font-size: 1.1rem; font-weight: 700; color:var(--text-main);" id="cartTotal">S/ 0.00</div>
+            <div style="font-size: 0.85rem; color:#888;" id="cartCount">0 items</div>
+            <div style="font-size: 1.2rem; font-weight: 800; color:#000;" id="cartTotal">S/ 0.00</div>
         </div>
-        <button onclick="checkoutWhatsApp()" style="background: var(--text-main); color: white; padding: 10px 25px; border-radius: 50px; font-weight: 700; letter-spacing: 1px;">PEDIR</button>
+        <button onclick="checkoutWhatsApp()" style="background: #111; color: white; padding: 12px 30px; border-radius: 50px; font-weight: 700; letter-spacing: 1px;">PEDIR</button>
     </div>
 
     <div class="modal-overlay" id="wheelModal">
@@ -453,13 +534,11 @@
                 const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(val => val.replace(/"/g, '').trim());
                 if(cols.length < 2) return null;
                 
-                // CORRECCIÓN: La descripción está en la columna 8 (índice 7)
                 return {
                     id: parseInt(cols[0]) || index,
                     name: cols[1],
                     price: parseFloat(cols[2]) || 0,
-                    // INDICE 7 ES LA COLUMNA 8 (A,B,C,D,E,F,G,H)
-                    description: cols[7] || "Hermoso arreglo floral fresco y elegante.", 
+                    description: cols[7] || "Hermoso arreglo floral fresco y elegante, diseñado con las flores más selectas del día.", 
                     category: cols[4] || 'Varios',
                     tag: cols[5],
                     image: cols[6]
@@ -480,6 +559,7 @@
                 section.className = 'category-block';
                 section.id = 'cat-' + cat.replace(/\s+/g, '-');
                 
+                // Generamos las tarjetas con el nuevo HTML para Badges y Corazón
                 section.innerHTML = `
                     <div class="cat-title-wrap"><h2 class="cat-title">${cat}</h2></div>
                     <div class="product-grid" id="grid-${cat.replace(/\s+/g, '-')}">
@@ -487,13 +567,19 @@
                             <div class="prod-card ${index >= 4 ? 'hidden-item' : ''}" 
                                  style="${index >= 4 ? 'display:none;' : ''}" 
                                  onclick="openProductDetail(${p.id})">
+                                
                                 <div class="prod-img-wrap">
                                     <img src="${fixUrl(p.image)}" class="prod-img" loading="lazy">
-                                    ${p.tag ? `<span style="position:absolute;top:10px;left:10px;background:var(--text-main);color:white;padding:2px 8px;font-size:0.6rem;letter-spacing:1px;">${p.tag}</span>` : ''}
+                                    ${p.tag ? `<div class="badge-discount">${p.tag}</div>` : ''}
+                                    <div class="badge-heart" onclick="event.stopPropagation(); toggleHeart(this)"><i class="fa-regular fa-heart"></i></div>
                                 </div>
+                                
                                 <div class="prod-info">
                                     <div class="prod-name">${p.name}</div>
-                                    <div class="prod-price">S/ ${p.price.toFixed(2)}</div>
+                                    <div class="prod-price">
+                                        S/ ${p.price.toFixed(2)}
+                                        ${p.tag ? `<span class="prod-price-old">S/ ${(p.price * 1.2).toFixed(2)}</span>` : ''}
+                                    </div>
                                 </div>
                             </div>
                         `).join('')}
@@ -502,6 +588,19 @@
                 `;
                 container.appendChild(section);
             });
+        }
+
+        function toggleHeart(el) {
+            const icon = el.querySelector('i');
+            if(icon.classList.contains('fa-regular')) {
+                icon.classList.remove('fa-regular');
+                icon.classList.add('fa-solid');
+                icon.style.color = 'var(--accent-color)';
+            } else {
+                icon.classList.add('fa-regular');
+                icon.classList.remove('fa-solid');
+                icon.style.color = '#ccc';
+            }
         }
 
         function showAll(catId, btn) {
@@ -523,7 +622,7 @@
             
             const btn = document.getElementById('modalAddBtn');
             const inCart = cart.find(x => x.id === id);
-            btn.innerText = inCart ? "YA ESTÁ EN EL CARRITO" : "AGREGAR AL CARRITO";
+            btn.innerText = inCart ? "AGREGADO" : "AGREGAR AL CARRITO";
             btn.onclick = () => { addToCart(p.id); closeProductModal(null); };
 
             document.getElementById('productModal').style.display = 'flex';
