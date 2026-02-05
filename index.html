@@ -122,7 +122,7 @@
         }
         @keyframes slideDown { from{transform: translateY(-10px); opacity:0;} to{transform: translateY(0); opacity:1;} }
 
-        /* --- 3. HERO GIF (SIN TEXTO) --- */
+        /* --- 3. HERO GIF (LIMPIO) --- */
         .hero-slider {
             position: relative;
             height: 65vh;
@@ -138,9 +138,8 @@
         
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.1); /* Sombra muy suave solo para matizar */
+            background: rgba(0,0,0,0.15); /* Sombra sutil */
             z-index: 10;
-            /* Texto y botones eliminados */
         }
 
         /* --- 4. CATÁLOGO --- */
@@ -426,7 +425,7 @@
                     height: 0; 
                     border-left: 10px solid transparent;
                     border-right: 10px solid transparent;
-                    border-top: 20px solid #333;
+                    border-top: 20px solid #D32F2F;
                     z-index: 10;
                 "></div>
             </div>
@@ -468,7 +467,7 @@
                     renderExtras(); 
                 }
 
-                if(!localStorage.getItem('fiore_played_v6')) {
+                if(!localStorage.getItem('fiore_played_v7')) {
                     setTimeout(() => { 
                         document.getElementById('wheelModal').style.display = 'flex'; 
                         drawWheel(); 
@@ -693,7 +692,7 @@
             document.querySelectorAll('.load-more-btn').forEach(b => b.style.display = 'none');
         }
 
-        /* --- RULETA CORREGIDA --- */
+        /* --- RULETA LÓGICA FINAL --- */
         const prizes = ['Globo Corazón', 'Polaroid', 'Dedicatoria', '5% OFF', 'Flor Estación', 'Cajita Regalo'];
         const colors = ['#ffebee', '#D32F2F', '#ffebee', '#D32F2F', '#ffebee', '#D32F2F']; 
         
@@ -739,11 +738,17 @@
             let v = 0.5, a = 0; 
             const tick = () => {
                 if(v < 0.002) {
-                    const win = prizes[Math.floor(Math.random()*prizes.length)];
+                    // CÁLCULO DE GANADOR EXACTO (Geometría)
+                    // La flecha está en -PI/2 (12 o'clock). El giro es horario (a aumenta).
+                    // El índice ganador es el que cubre el ángulo de la flecha después de girar.
+                    const arc = 2 * Math.PI / prizes.length;
+                    const index = Math.floor((2 * Math.PI - (a % (2 * Math.PI))) / arc) % prizes.length;
+                    
+                    const win = prizes[index];
                     document.getElementById('wheelResult').innerText = `¡Ganaste: ${win}!`;
                     cart.push({id:999, name:`Premio: ${win}`, price:0, isPrize:true});
                     updateCartUI(); 
-                    localStorage.setItem('fiore_played_v6','true'); 
+                    localStorage.setItem('fiore_played_v7','true'); 
                     setTimeout(()=>document.getElementById('wheelModal').style.display='none', 3500); 
                     return;
                 }
