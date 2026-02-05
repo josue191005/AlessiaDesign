@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <meta name="description" content="Fiore Di Ale: Arreglos florales exclusivos y detalles que enamoran.">
     <title>Fiore Di Ale | Boutique Floral</title>
@@ -17,14 +17,14 @@
     <style>
         /* --- 1. CONFIGURACIÓN GENERAL --- */
         :root {
-            --bg-color: #FAFAFA;       /* Fondo general muy suave */
+            --bg-color: #FAFAFA;
             --header-bg: #FFFFFF;
             --text-main: #333333;
             --text-light: #777777;
-            --accent-color: #D32F2F;   /* Rojo/Rosa intenso estilo Bloom/Alore */
-            --accent-soft: #ffeffc;
+            --accent-color: #D32F2F;   /* Rojo intenso */
+            --accent-soft: #ffebee;
             --gold: #C5A059;
-            --border-radius-card: 16px; /* Borde redondeado estilo Alore */
+            --border-radius-card: 16px;
             
             --font-title: 'Playfair Display', serif;
             --font-body: 'Lato', sans-serif;
@@ -65,7 +65,7 @@
             font-size: 1.6rem;
             font-weight: 700;
             letter-spacing: 0.5px;
-            color: var(--accent-color); /* Logo en color destacado */
+            color: var(--accent-color);
         }
 
         .header-icons { display: flex; gap: 18px; font-size: 1.3rem; color: var(--text-main); }
@@ -111,25 +111,21 @@
 
         /* BUSCADOR */
         #searchContainer {
-            display: none; 
-            position: fixed; top: 70px; left: 0;
-            width: 100%; z-index: 999;
-            background: #fff; 
-            padding: 15px; 
+            display: none; position: fixed; top: 70px; left: 0;
+            width: 100%; z-index: 999; background: #fff; padding: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             animation: slideDown 0.3s ease;
         }
         #searchInput {
-            width: 100%; padding: 12px 20px; 
-            border: 1px solid #eee; border-radius: 50px; 
+            width: 100%; padding: 12px 20px; border: 1px solid #eee; border-radius: 50px; 
             font-family: var(--font-body); background: #f9f9f9; outline: none;
         }
         @keyframes slideDown { from{transform: translateY(-10px); opacity:0;} to{transform: translateY(0); opacity:1;} }
 
-        /* --- 3. HERO SLIDER --- */
+        /* --- 3. HERO GIF (SIN TEXTO) --- */
         .hero-slider {
             position: relative;
-            height: 65vh; /* Un poco más alto */
+            height: 65vh;
             width: 100%;
             overflow: hidden;
             background: #f0f0f0;
@@ -137,38 +133,20 @@
         
         .slide {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0; transition: opacity 1.5s ease-in-out;
             background-size: cover; background-position: center;
         }
-        .slide.active { opacity: 1; }
         
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.25); z-index: 10;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; color: white; padding: 20px;
+            background: rgba(0,0,0,0.1); /* Sombra muy suave solo para matizar */
+            z-index: 10;
+            /* Texto y botones eliminados */
         }
-        .hero-title {
-            font-family: var(--font-title); font-size: 3.5rem; margin-bottom: 15px;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.4); font-style: italic;
-        }
-        .hero-btn {
-            margin-top: 25px; padding: 14px 35px;
-            background: white; color: var(--text-main);
-            font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
-            font-size: 0.8rem; border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: var(--transition);
-        }
-        .hero-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
 
-        /* --- 4. CATÁLOGO ESTILO ALORE --- */
+        /* --- 4. CATÁLOGO --- */
         .main-container { max-width: 1200px; margin: 50px auto; padding: 0 20px; }
-        
         .category-block { margin-bottom: 70px; }
-        .cat-title-wrap { 
-            text-align: center; margin-bottom: 40px; position: relative; 
-        }
+        .cat-title-wrap { text-align: center; margin-bottom: 40px; position: relative; }
         .cat-title { 
             font-family: var(--font-title); font-size: 2.5rem; color: var(--text-main); 
             display: inline-block; padding: 0 25px; background: var(--bg-color); z-index: 2; position: relative;
@@ -187,24 +165,14 @@
             .product-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
         }
 
-        /* TARJETA DE PRODUCTO - ESTILO ALORE */
         .prod-card {
-            background: white; 
-            border-radius: var(--border-radius-card); 
-            transition: var(--transition); 
-            cursor: pointer; 
-            position: relative;
-            overflow: hidden; /* Para que el borde redondeado corte la imagen */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.03); /* Sombra muy sutil */
+            background: white; border-radius: var(--border-radius-card); transition: var(--transition); 
+            cursor: pointer; position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.03);
         }
-        .prod-card:hover { 
-            transform: translateY(-8px); 
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08); 
-        }
+        .prod-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
 
         .prod-img-wrap {
-            width: 100%; padding-top: 125%; /* Formato 4:5 (más vertical) */
-            position: relative; overflow: hidden; background: #f8f8f8;
+            width: 100%; padding-top: 125%; position: relative; overflow: hidden; background: #f8f8f8;
         }
         .prod-img {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -212,47 +180,28 @@
         }
         .prod-card:hover .prod-img { transform: scale(1.08); }
 
-        /* BADGES FLOTANTES (Descuento y Corazón) */
         .badge-discount {
             position: absolute; top: 15px; left: 0;
-            background: #E57373; /* Color Salmón/Rojo Alore */
-            color: white;
-            padding: 5px 12px;
+            background: #E57373; color: white; padding: 5px 12px;
             font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
-            border-radius: 0 4px 4px 0;
-            z-index: 5;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            border-radius: 0 4px 4px 0; z-index: 5; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
         
         .badge-heart {
             position: absolute; top: 15px; right: 15px;
-            width: 35px; height: 35px;
-            background: white;
-            border-radius: 50%;
+            width: 35px; height: 35px; background: white; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            color: #ccc; z-index: 5;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: 0.3s;
+            color: #ccc; z-index: 5; box-shadow: 0 3px 10px rgba(0,0,0,0.1); transition: 0.3s;
         }
         .badge-heart:hover { color: var(--accent-color); transform: scale(1.1); }
-        .badge-heart i { font-size: 1.1rem; margin-top: 1px; }
 
         .prod-info { padding: 18px 15px; text-align: center; }
-        
         .prod-name { 
-            font-family: var(--font-title); /* Fuente Serif elegante */
-            font-size: 1.1rem; 
-            font-weight: 600; 
-            color: #1a1a1a; 
-            margin-bottom: 8px; 
-            line-height: 1.2;
+            font-family: var(--font-title); font-size: 1.1rem; font-weight: 600; 
+            color: #1a1a1a; margin-bottom: 8px; line-height: 1.2;
         }
-        
         .prod-price { 
-            font-family: var(--font-body); 
-            font-size: 1.1rem; 
-            color: var(--accent-color); /* Precio en rojo/rosa */
-            font-weight: 700; 
+            font-family: var(--font-body); font-size: 1.1rem; color: var(--accent-color); font-weight: 700; 
         }
         .prod-price-old {
             font-size: 0.9rem; color: #999; text-decoration: line-through; margin-left: 8px; font-weight: 400;
@@ -266,93 +215,69 @@
         }
         .load-more-btn:hover { background: var(--text-main); color: white; }
 
-        /* --- 5. MODAL DETALLE - ESTILO BLOOM --- */
-        .prod-modal-overlay {
+        /* --- 5. MODAL DETALLE --- */
+        .prod-modal-overlay, .upsell-modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.7); z-index: 3000;
             display: none; justify-content: center; align-items: center;
-            padding: 0; backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
         }
-        
-        /* Modal estilo Bloom: Imagen arriba, texto abajo limpio */
         .prod-modal {
-            background: white; width: 100%; height: 100%; 
-            overflow-y: auto;
-            display: flex; flex-direction: column;
-            position: relative; animation: fadeInUp 0.4s ease;
+            background: white; width: 100%; height: 100%; overflow-y: auto;
+            display: flex; flex-direction: column; position: relative; animation: fadeInUp 0.4s ease;
         }
         @media (min-width: 768px) {
-            .prod-modal { 
-                width: 900px; height: auto; max-height: 90vh; 
-                flex-direction: row; border-radius: 10px; overflow: hidden;
-            }
+            .prod-modal { width: 900px; height: auto; max-height: 90vh; flex-direction: row; border-radius: 10px; overflow: hidden; }
         }
 
-        .modal-img-col { 
-            flex: 1.2; 
-            background: white; /* Bloom usa fondo limpio */
-            min-height: 400px; 
-            display: flex; align-items: center; justify-content: center;
-            position: relative;
-        }
+        .modal-img-col { flex: 1.2; background: white; min-height: 400px; display: flex; align-items: center; justify-content: center; }
         .modal-img { width: 100%; height: 100%; object-fit: cover; }
         
-        .modal-info-col { 
-            flex: 1; padding: 40px 30px; 
-            display: flex; flex-direction: column; 
-            justify-content: center; 
-            text-align: center; /* Centrado como en referencia */
-            background: #fff;
-        }
-        
+        .modal-info-col { flex: 1; padding: 40px 30px; display: flex; flex-direction: column; justify-content: center; text-align: center; background: #fff; }
         .modal-close {
             position: absolute; top: 20px; right: 20px; font-size: 2rem; 
-            cursor: pointer; color: #333; z-index: 20; 
-            background: white; width: 45px; height: 45px; 
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            cursor: pointer; color: #333; z-index: 20; background: white; width: 45px; height: 45px; 
+            display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        
-        .modal-title { 
-            font-family: var(--font-body); /* Bloom usa Sans Serif Bold */
-            font-size: 1.8rem; 
-            line-height: 1.2; 
-            margin-bottom: 10px; 
-            text-transform: uppercase; 
-            font-weight: 800;
-            color: #000;
-        }
-        
-        .modal-price { 
-            font-size: 1.8rem; 
-            color: #D32F2F; /* Rojo intenso Bloom */
-            margin-bottom: 25px; 
-            font-weight: 700; 
-            font-family: var(--font-body);
-        }
-        
-        .modal-desc { 
-            color: #555; 
-            margin-bottom: 35px; 
-            line-height: 1.8; 
-            font-size: 1rem; 
-            white-space: pre-wrap; 
-            padding: 0 10px;
-        }
-        
-        .modal-add-btn {
-            background: #111; color: white; border: none;
-            padding: 18px; width: 100%; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
-            transition: var(--transition); border-radius: 4px; font-size: 1rem;
-        }
+        .modal-title { font-family: var(--font-body); font-size: 1.8rem; line-height: 1.2; margin-bottom: 10px; text-transform: uppercase; font-weight: 800; color: #000; }
+        .modal-price { font-size: 1.8rem; color: var(--accent-color); margin-bottom: 25px; font-weight: 700; }
+        .modal-desc { color: #555; margin-bottom: 35px; line-height: 1.8; font-size: 1rem; white-space: pre-wrap; padding: 0 10px; }
+        .modal-add-btn { background: #111; color: white; border: none; padding: 18px; width: 100%; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; border-radius: 4px; }
         .modal-add-btn:hover { background: var(--accent-color); }
+
+        /* --- 6. MODAL UPSELL (EXTRAS) --- */
+        .upsell-box {
+            background: white; width: 90%; max-width: 500px; padding: 30px;
+            border-radius: 20px; text-align: center; position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); animation: fadeInUp 0.3s ease;
+        }
+        .upsell-title { font-family: var(--font-title); font-size: 1.8rem; margin-bottom: 10px; color: var(--text-main); }
+        .upsell-subtitle { font-size: 0.9rem; color: #666; margin-bottom: 20px; }
+        
+        .extras-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 25px; }
+        .extra-card {
+            border: 2px solid #eee; border-radius: 10px; padding: 10px; cursor: pointer;
+            transition: 0.3s; display: flex; flex-direction: column; align-items: center;
+        }
+        .extra-card.selected { border-color: var(--accent-color); background-color: var(--accent-soft); }
+        .extra-img { width: 100%; height: 80px; object-fit: cover; border-radius: 8px; margin-bottom: 8px; }
+        .extra-name { font-size: 0.75rem; font-weight: 700; line-height: 1.2; margin-bottom: 4px; }
+        .extra-price { font-size: 0.8rem; color: var(--accent-color); font-weight: 700; }
+        
+        .btn-confirm-wsp {
+            background: #25D366; color: white; width: 100%; padding: 15px;
+            border-radius: 50px; font-weight: 700; font-size: 1rem;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); transition: 0.3s;
+        }
+        .btn-confirm-wsp:hover { transform: scale(1.02); }
 
         @keyframes fadeInUp { from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
 
-        /* --- 6. OTROS --- */
+        /* --- 7. OTROS --- */
         .about-section { background: white; padding: 80px 0; border-top: 1px solid #f5f5f5; margin-top: 60px; }
         .about-container { display: flex; flex-direction: column; gap: 40px; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        .about-img { width: 100%; max-width: 400px; border-radius: 20px; box-shadow: 15px 15px 0px #FCE4EC; }
+        .about-img { width: 100%; max-width: 400px; border-radius: 20px; box-shadow: 15px 15px 0px #ffebee; }
         .about-txt { text-align: center; max-width: 600px; }
         .about-txt h2 { font-family: var(--font-title); font-size: 2.5rem; margin-bottom: 20px; }
         @media (min-width: 1024px) {
@@ -360,31 +285,21 @@
             .about-txt { text-align: left; }
         }
 
-        footer { 
-            background: #111; color: #fff; 
-            padding: 60px 20px; text-align: center; 
-            font-family: var(--font-body);
-        }
+        footer { background: #111; color: #fff; padding: 60px 20px; text-align: center; font-family: var(--font-body); }
         .social-btn { font-size: 1.5rem; margin: 0 15px; color: #999; transition: 0.3s; }
         .social-btn:hover { color: white; transform: scale(1.2); }
 
         /* FLOTANTES */
         .cart-bar {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            background: white; border-top: 1px solid #eee;
-            z-index: 2000; padding: 15px 20px;
-            display: flex; justify-content: space-between; align-items: center;
-            transform: translateY(100%); transition: 0.4s;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
+            position: fixed; bottom: 0; left: 0; width: 100%; background: white; border-top: 1px solid #eee;
+            z-index: 2000; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+            transform: translateY(100%); transition: 0.4s; box-shadow: 0 -5px 20px rgba(0,0,0,0.1);
         }
         .cart-bar.visible { transform: translateY(0); }
-        
         .wsp-fixed {
-            position: fixed; bottom: 30px; right: 20px; z-index: 1999;
-            background: #25D366; color: white; width: 60px; height: 60px;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 32px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            transition: bottom 0.4s ease, transform 0.3s;
+            position: fixed; bottom: 30px; right: 20px; z-index: 1999; background: #25D366; color: white;
+            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 32px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); transition: bottom 0.4s ease, transform 0.3s;
         }
         .wsp-fixed:hover { transform: scale(1.1); }
         .wsp-fixed.shift-up { bottom: 100px; }
@@ -392,7 +307,6 @@
         /* MODAL RULETA */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 5000; justify-content: center; align-items: center; backdrop-filter: blur(2px); }
         .modal-box { background: white; padding: 30px; border-radius: 20px; text-align: center; width: 90%; max-width: 350px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        
         #loader { text-align: center; margin-top: 100px; }
     </style>
 </head>
@@ -404,8 +318,7 @@
             <span style="font-family: var(--font-title); font-weight: 700; font-size: 1.2rem;">MENÚ</span>
             <div class="close-btn" onclick="toggleSidebar()">×</div>
         </div>
-        <div class="sidebar-menu" id="sidebarMenuContent">
-            </div>
+        <div class="sidebar-menu" id="sidebarMenuContent"></div>
         <div style="padding: 20px; text-align: center; border-top: 1px solid #eee;">
             <p style="font-size: 0.8rem; color:#999;">Fiore Di Ale © 2026</p>
         </div>
@@ -424,19 +337,12 @@
     </div>
 
     <section class="hero-slider">
-        <div class="slide active" style="background-image: url('https://wsrv.nl/?url=https://drive.google.com/uc?id=11_CYRq0kOhoDk-zcnge6Tyy2Ih4xbfUJ&w=1400&q=80');"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1562690868-60bbe7293e94?q=80&w=1400');"></div>
-        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=1400');"></div>
-        <div class="hero-overlay">
-            <h1 class="hero-title">Detalles que<br>Enamoran</h1>
-            <button class="hero-btn" onclick="document.querySelector('.main-container').scrollIntoView({behavior:'smooth'})">Ver Colección</button>
-        </div>
-    </section>
+        <div class="slide active" style="background-image: url('./hero.gif');"></div>
+        <div class="hero-overlay"></div> </section>
 
     <div id="loader"><i class="fa-solid fa-spinner fa-spin fa-3x" style="color:var(--gold);"></i></div>
     
-    <div class="main-container" id="mainContainer">
-        </div>
+    <div class="main-container" id="mainContainer"></div>
 
     <section id="nosotros" class="about-section">
         <div class="about-container">
@@ -464,17 +370,31 @@
     <div class="prod-modal-overlay" id="productModal" onclick="closeProductModal(event)">
         <div class="prod-modal">
             <div class="modal-close" onclick="closeProductModal(null)">×</div>
-            
             <div class="modal-img-col">
                 <img src="" id="modalImg" class="modal-img">
             </div>
-            
             <div class="modal-info-col">
                 <h2 id="modalTitle" class="modal-title">NOMBRE PRODUCTO</h2>
                 <div id="modalPrice" class="modal-price">S/ 0.00</div>
-                <div id="modalDesc" class="modal-desc">Descripción del producto aquí.</div>
+                <div id="modalDesc" class="modal-desc"></div>
                 <button class="modal-add-btn" id="modalAddBtn">AGREGAR AL CARRITO</button>
             </div>
+        </div>
+    </div>
+
+    <div class="upsell-modal-overlay" id="upsellModal" onclick="if(event.target === this) closeUpsellModal()">
+        <div class="upsell-box">
+            <div class="modal-close" onclick="closeUpsellModal()" style="top:10px; right:10px; width:35px; height:35px; font-size:1.5rem;">×</div>
+            <h3 class="upsell-title">¿Deseas agregar algo más?</h3>
+            <p class="upsell-subtitle">Haz tu regalo aún más especial con estos extras:</p>
+            
+            <div class="extras-grid" id="extrasGrid">
+                </div>
+
+            <button class="btn-confirm-wsp" onclick="finalCheckout()">
+                <span>Confirmar y Pedir</span>
+                <i class="fa-brands fa-whatsapp"></i>
+            </button>
         </div>
     </div>
 
@@ -487,14 +407,30 @@
             <div style="font-size: 0.85rem; color:#888;" id="cartCount">0 items</div>
             <div style="font-size: 1.2rem; font-weight: 800; color:#000;" id="cartTotal">S/ 0.00</div>
         </div>
-        <button onclick="checkoutWhatsApp()" style="background: #111; color: white; padding: 12px 30px; border-radius: 50px; font-weight: 700; letter-spacing: 1px;">PEDIR</button>
+        <button onclick="openUpsellModal()" style="background: #111; color: white; padding: 12px 30px; border-radius: 50px; font-weight: 700; letter-spacing: 1px;">PEDIR</button>
     </div>
 
     <div class="modal-overlay" id="wheelModal">
         <div class="modal-box">
             <div style="position:absolute; top:10px; right:15px; cursor:pointer;" onclick="document.getElementById('wheelModal').style.display='none'">×</div>
             <h3 style="font-family: var(--font-title); color: var(--accent-color); margin-bottom:15px;">¡Sorpresa! 🎁</h3>
-            <canvas id="wheelCanvas" width="250" height="250" style="width:100%; height:auto;"></canvas>
+            
+            <div style="position: relative; width: 250px; height: 250px; margin: 0 auto;">
+                <canvas id="wheelCanvas" width="250" height="250"></canvas>
+                <div style="
+                    position: absolute; 
+                    top: -10px; 
+                    left: 50%; 
+                    transform: translateX(-50%); 
+                    width: 0; 
+                    height: 0; 
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-top: 20px solid #333;
+                    z-index: 10;
+                "></div>
+            </div>
+
             <button id="spinBtn" onclick="spinWheel()" style="background: var(--accent-color); color: white; padding: 10px 30px; border-radius: 50px; margin-top: 15px; font-weight: bold;">GIRAR</button>
             <div id="wheelResult" style="margin-top:10px; font-weight:bold;"></div>
         </div>
@@ -506,20 +442,33 @@
         
         let products = [];
         let cart = [];
-        let currentModalProductId = null;
+        let selectedUpsells = [];
+
+        // EXTRAS - Precios Actualizados
+        const extras = [
+            { id: 'ex1', name: 'Ferrero Rocher', price: 14.00, img: 'https://drive.google.com/file/d/1VcTIxRxuxmUWi9Qns5peFXRpwxAxY8nP/view?usp=sharing' },
+            { id: 'ex2', name: 'Hot Wheels', price: 10.90, img: 'https://drive.google.com/file/d/1Ei97uS2rnskCfawr4ZxGsakc_5It_4Vz/view?usp=drive_link' },
+            { id: 'ex3', name: 'Polaroid', price: 9.90, img: 'https://drive.google.com/file/d/1mb8LFjsqG-GU5t76KI1RpTmmiXgwtoKa/view?usp=drive_link' }
+        ];
 
         async function init() {
             try {
-                startHeroSlider();
-                const res = await fetch(SHEET_URL);
+                const res = await fetch(SHEET_URL + '&t=' + Date.now());
+                if (!res.ok) throw new Error("Error de conexión");
                 const text = await res.text();
                 products = parseCSV(text);
                 
                 document.getElementById('loader').style.display = 'none';
-                renderSidebar();
-                renderCategories(); 
+                
+                if (products.length === 0) {
+                    alert("No se encontraron productos. Revisa el Excel.");
+                } else {
+                    renderSidebar();
+                    renderCategories();
+                    renderExtras(); 
+                }
 
-                if(!localStorage.getItem('fiore_played_v3')) {
+                if(!localStorage.getItem('fiore_played_v6')) {
                     setTimeout(() => { 
                         document.getElementById('wheelModal').style.display = 'flex'; 
                         drawWheel(); 
@@ -528,20 +477,24 @@
             } catch (err) { console.error(err); }
         }
 
+        // --- PARSEADOR INTELIGENTE ---
         function parseCSV(csv) {
-            const rows = csv.split(/\r?\n/).slice(1);
+            const safeCSV = csv.replace(/"([^"]*)"/g, (match, content) => {
+                return '"' + content.replace(/[\r\n]+/g, ' ') + '"';
+            });
+            const rows = safeCSV.split(/\r?\n/).slice(1);
             return rows.map((row, index) => {
-                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(val => val.replace(/"/g, '').trim());
+                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(val => val.replace(/^"|"$/g, '').trim());
                 if(cols.length < 2) return null;
                 
                 return {
-                    id: parseInt(cols[0]) || index,
+                    id: parseInt(cols[0]) || index + 1000,
                     name: cols[1],
                     price: parseFloat(cols[2]) || 0,
-                    description: cols[7] || "Hermoso arreglo floral fresco y elegante, diseñado con las flores más selectas del día.", 
-                    category: cols[4] || 'Varios',
+                    category: cols[4] || 'Varios', 
                     tag: cols[5],
-                    image: cols[6]
+                    image: cols[6],
+                    description: cols[7] || "Hermoso arreglo floral."
                 };
             }).filter(p => p && p.price > 0);
         }
@@ -559,7 +512,6 @@
                 section.className = 'category-block';
                 section.id = 'cat-' + cat.replace(/\s+/g, '-');
                 
-                // Generamos las tarjetas con el nuevo HTML para Badges y Corazón
                 section.innerHTML = `
                     <div class="cat-title-wrap"><h2 class="cat-title">${cat}</h2></div>
                     <div class="product-grid" id="grid-${cat.replace(/\s+/g, '-')}">
@@ -567,13 +519,11 @@
                             <div class="prod-card ${index >= 4 ? 'hidden-item' : ''}" 
                                  style="${index >= 4 ? 'display:none;' : ''}" 
                                  onclick="openProductDetail(${p.id})">
-                                
                                 <div class="prod-img-wrap">
                                     <img src="${fixUrl(p.image)}" class="prod-img" loading="lazy">
                                     ${p.tag ? `<div class="badge-discount">${p.tag}</div>` : ''}
                                     <div class="badge-heart" onclick="event.stopPropagation(); toggleHeart(this)"><i class="fa-regular fa-heart"></i></div>
                                 </div>
-                                
                                 <div class="prod-info">
                                     <div class="prod-name">${p.name}</div>
                                     <div class="prod-price">
@@ -590,16 +540,72 @@
             });
         }
 
+        /* --- LÓGICA DE EXTRAS / UPSELL --- */
+        function renderExtras() {
+            const grid = document.getElementById('extrasGrid');
+            grid.innerHTML = extras.map(ex => `
+                <div class="extra-card" id="extra-${ex.id}" onclick="toggleExtra('${ex.id}')">
+                    <img src="${fixUrl(ex.img)}" class="extra-img">
+                    <div class="extra-name">${ex.name}</div>
+                    <div class="extra-price">+ S/ ${ex.price.toFixed(2)}</div>
+                </div>
+            `).join('');
+        }
+
+        function toggleExtra(id) {
+            const card = document.getElementById(`extra-${id}`);
+            const ex = extras.find(e => e.id === id);
+            
+            if (selectedUpsells.find(e => e.id === id)) {
+                selectedUpsells = selectedUpsells.filter(e => e.id !== id);
+                card.classList.remove('selected');
+            } else {
+                selectedUpsells.push(ex);
+                card.classList.add('selected');
+            }
+        }
+
+        function openUpsellModal() {
+            if (cart.length === 0) return alert("Tu carrito está vacío.");
+            document.getElementById('upsellModal').style.display = 'flex';
+        }
+
+        function closeUpsellModal() {
+            document.getElementById('upsellModal').style.display = 'none';
+        }
+
+        function finalCheckout() {
+            let msg = "Hola Fiore Di Ale 🌷, deseo pedir:\n\n";
+            let sub = 0;
+            
+            cart.forEach(i => {
+                if(i.isPrize) msg += `🎁 REGALO: ${i.name}\n`;
+                else { 
+                    msg += `▫️ ${i.name} (S/${i.price.toFixed(2)})\n`; 
+                    sub += i.price; 
+                }
+            });
+
+            if (selectedUpsells.length > 0) {
+                msg += "\n✨ EXTRAS AÑADIDOS:\n";
+                selectedUpsells.forEach(ex => {
+                    msg += `➕ ${ex.name} (S/${ex.price.toFixed(2)})\n`;
+                    sub += ex.price;
+                });
+            }
+
+            msg += `\n*TOTAL A PAGAR: S/${sub.toFixed(2)}*`;
+            window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+            closeUpsellModal();
+        }
+
+        /* --- RESTO DE FUNCIONES --- */
         function toggleHeart(el) {
             const icon = el.querySelector('i');
             if(icon.classList.contains('fa-regular')) {
-                icon.classList.remove('fa-regular');
-                icon.classList.add('fa-solid');
-                icon.style.color = 'var(--accent-color)';
+                icon.classList.remove('fa-regular'); icon.classList.add('fa-solid'); icon.style.color = 'var(--accent-color)';
             } else {
-                icon.classList.add('fa-regular');
-                icon.classList.remove('fa-solid');
-                icon.style.color = '#ccc';
+                icon.classList.add('fa-regular'); icon.classList.remove('fa-solid'); icon.style.color = '#ccc';
             }
         }
 
@@ -613,18 +619,14 @@
         function openProductDetail(id) {
             const p = products.find(x => x.id === id);
             if(!p) return;
-
-            currentModalProductId = p.id;
             document.getElementById('modalImg').src = fixUrl(p.image);
             document.getElementById('modalTitle').innerText = p.name;
             document.getElementById('modalPrice').innerText = `S/ ${p.price.toFixed(2)}`;
             document.getElementById('modalDesc').innerText = p.description;
-            
             const btn = document.getElementById('modalAddBtn');
             const inCart = cart.find(x => x.id === id);
-            btn.innerText = inCart ? "AGREGADO" : "AGREGAR AL CARRITO";
+            btn.innerText = inCart ? "AGREGAR OTRO" : "AGREGAR AL CARRITO";
             btn.onclick = () => { addToCart(p.id); closeProductModal(null); };
-
             document.getElementById('productModal').style.display = 'flex';
         }
 
@@ -636,15 +638,9 @@
         function renderSidebar() {
             const menu = document.getElementById('sidebarMenuContent');
             const categories = [...new Set(products.map(p => p.category))];
-            
             let html = `<a href="#" onclick="toggleSidebar(); window.scrollTo(0,0);">INICIO</a>`;
             categories.forEach(cat => {
-                html += `<a href="#cat-${cat.replace(/\s+/g, '-')}" onclick="toggleSidebar()">
-                            <div class="menu-item-content">
-                                <span>${cat}</span>
-                                <i class="fa-solid fa-chevron-right" style="font-size:0.7rem; color:#ccc;"></i>
-                            </div>
-                         </a>`;
+                html += `<a href="#cat-${cat.replace(/\s+/g, '-')}" onclick="toggleSidebar()">${cat}</a>`;
             });
             html += `<a href="#nosotros" onclick="toggleSidebar()">NOSOTROS</a>`;
             html += `<a href="#contacto" onclick="toggleSidebar()">CONTACTO</a>`;
@@ -665,22 +661,10 @@
             return `https://wsrv.nl/?url=${encodeURIComponent(u)}&w=600`;
         }
 
-        function startHeroSlider() {
-            const slides = document.querySelectorAll('.slide');
-            let idx = 0;
-            setInterval(() => {
-                slides[idx].classList.remove('active');
-                idx = (idx + 1) % slides.length;
-                slides[idx].classList.add('active');
-            }, 4000);
-        }
-        
         function addToCart(id) {
             const p = products.find(x => x.id === id);
-            if(!cart.find(x => x.id === id)) {
-                cart.push({...p, isPrize:false});
-                updateCartUI();
-            }
+            cart.push({...p, isPrize:false});
+            updateCartUI();
         }
 
         function updateCartUI() {
@@ -690,71 +674,78 @@
             
             const bar = document.getElementById('cartBar');
             const wsp = document.getElementById('wspBtn');
-            
             if (cart.length > 0) {
-                bar.classList.add('visible');
-                wsp.classList.add('shift-up');
+                bar.classList.add('visible'); wsp.classList.add('shift-up');
             } else {
-                bar.classList.remove('visible');
-                wsp.classList.remove('shift-up');
+                bar.classList.remove('visible'); wsp.classList.remove('shift-up');
             }
         }
 
-        function checkoutWhatsApp() {
-            if (cart.length === 0) return;
-            let msg = "Hola Fiore Di Ale 🌷, deseo pedir:\n\n";
-            let sub = 0;
-            cart.forEach(i => {
-                if(i.isPrize) msg += `🎁 REGALO: ${i.name}\n`;
-                else { msg += `▫️ ${i.name} (S/${i.price})\n`; sub += i.price; }
-            });
-            msg += `\n*TOTAL: S/${sub.toFixed(2)}*`;
-            window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-        
         function searchGlobal() {
             const term = document.getElementById('searchInput').value.toLowerCase();
-            const allCards = document.querySelectorAll('.prod-card');
-            
+            const cards = document.querySelectorAll('.prod-card');
             if(term === '') { renderCategories(); return; }
-
-            allCards.forEach(card => {
+            cards.forEach(card => {
                 const name = card.querySelector('.prod-name').innerText.toLowerCase();
-                if(name.includes(term)) {
-                    card.style.display = 'block';
-                    card.classList.remove('hidden-item');
-                } else {
-                    card.style.display = 'none';
-                }
+                if(name.includes(term)) { card.style.display = 'block'; card.classList.remove('hidden-item'); }
+                else { card.style.display = 'none'; }
             });
             document.querySelectorAll('.load-more-btn').forEach(b => b.style.display = 'none');
         }
 
-        const prizes = ['Envío Gratis', 'Dedicatoria', 'Bombones', 'Girasol', '5% OFF', 'Globo'];
-        const colors = ['#FFF0F5', '#F8BBD0', '#FFF0F5', '#F8BBD0', '#FFF0F5', '#F8BBD0']; 
+        /* --- RULETA CORREGIDA --- */
+        const prizes = ['Globo Corazón', 'Polaroid', 'Dedicatoria', '5% OFF', 'Flor Estación', 'Cajita Regalo'];
+        const colors = ['#ffebee', '#D32F2F', '#ffebee', '#D32F2F', '#ffebee', '#D32F2F']; 
         
         function drawWheel(ang = 0) {
             const cvs = document.getElementById('wheelCanvas'); if(!cvs) return;
             const ctx = cvs.getContext('2d'); const arc = Math.PI*2 / prizes.length;
+            const cx = 125, cy = 125, r = 125;
+            
             ctx.clearRect(0,0,250,250);
+            
+            // DIBUJAR SECTORES
             prizes.forEach((p,i) => {
-                const a = ang + i*arc;
-                ctx.beginPath(); ctx.fillStyle=colors[i]; ctx.moveTo(125,125); ctx.arc(125,125,125,a,a+arc); ctx.fill(); ctx.stroke();
-                ctx.save(); ctx.translate(125+Math.cos(a+arc/2)*80, 125+Math.sin(a+arc/2)*80); 
-                ctx.rotate(a+arc/2+Math.PI/2); ctx.fillStyle='#C2185B'; ctx.font='bold 12px Arial'; 
-                ctx.fillText(p, -ctx.measureText(p).width/2, 0); ctx.restore();
+                const a = ang + i*arc - Math.PI/2; 
+                ctx.beginPath(); 
+                ctx.fillStyle = colors[i]; 
+                ctx.moveTo(cx,cy); 
+                ctx.arc(cx,cy,r,a,a+arc); 
+                ctx.fill(); 
+                ctx.stroke();
+                
+                // TEXTO
+                ctx.save(); 
+                ctx.translate(cx + Math.cos(a + arc/2)*85, cy + Math.sin(a + arc/2)*85); 
+                ctx.rotate(a + arc/2 + Math.PI/2); 
+                
+                ctx.fillStyle = (i % 2 === 0) ? '#D32F2F' : '#fff'; 
+                ctx.font = 'bold 10px Arial'; 
+                ctx.textAlign = "center";
+                ctx.fillText(p, 0, 0); 
+                ctx.restore();
             });
+
+            // CIRCULO CENTRAL
+            ctx.beginPath();
+            ctx.arc(cx, cy, 20, 0, 2*Math.PI);
+            ctx.fillStyle = "white";
+            ctx.fill();
+            ctx.stroke();
         }
+
         function spinWheel() {
-            const btn = document.getElementById('spinBtn'); btn.disabled=true; btn.innerText="...";
+            const btn = document.getElementById('spinBtn'); btn.disabled=true; btn.innerText="GIRANDO...";
             let v = 0.5, a = 0; 
             const tick = () => {
                 if(v < 0.002) {
                     const win = prizes[Math.floor(Math.random()*prizes.length)];
                     document.getElementById('wheelResult').innerText = `¡Ganaste: ${win}!`;
                     cart.push({id:999, name:`Premio: ${win}`, price:0, isPrize:true});
-                    updateCartUI(); localStorage.setItem('fiore_played_v3','true');
-                    setTimeout(()=>document.getElementById('wheelModal').style.display='none', 2500); return;
+                    updateCartUI(); 
+                    localStorage.setItem('fiore_played_v6','true'); 
+                    setTimeout(()=>document.getElementById('wheelModal').style.display='none', 3500); 
+                    return;
                 }
                 a += v; v *= 0.985; drawWheel(a); requestAnimationFrame(tick);
             };
