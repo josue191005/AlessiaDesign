@@ -122,13 +122,23 @@
         }
         @keyframes slideDown { from{transform: translateY(-10px); opacity:0;} to{transform: translateY(0); opacity:1;} }
 
-        /* --- 3. HERO GIF (LIMPIO) --- */
+        /* --- 3. HERO GIF (SIN TEXTO) --- */
         .hero-slider {
             position: relative;
-            height: 65vh;
+            height: 65vh; /* Altura normal para celular */
             width: 100%;
             overflow: hidden;
             background: #f0f0f0;
+        }
+
+        /* AJUSTE PARA PC: Formato Cuadrado Grande */
+        @media (min-width: 768px) {
+            .hero-slider {
+                height: auto;       /* Dejamos que la altura se ajuste */
+                aspect-ratio: 1/1;  /* Fuerza formato cuadrado perfecto */
+                max-height: 90vh;   /* Tope para que no sea más alto que la pantalla y no tengas que scrollear mucho */
+                margin: 0 auto;     /* Centrarlo si sobra espacio a los lados */
+            }
         }
         
         .slide {
@@ -443,13 +453,15 @@
         let cart = [];
         let selectedUpsells = [];
 
-        // EXTRAS - Precios Actualizados
+      // EXTRAS - Lista Actualizada
         const extras = [
             { id: 'ex1', name: 'Ferrero Rocher', price: 14.00, img: 'https://drive.google.com/file/d/1VcTIxRxuxmUWi9Qns5peFXRpwxAxY8nP/view?usp=sharing' },
             { id: 'ex2', name: 'Hot Wheels', price: 10.90, img: 'https://drive.google.com/file/d/1Ei97uS2rnskCfawr4ZxGsakc_5It_4Vz/view?usp=drive_link' },
-            { id: 'ex3', name: 'Polaroid', price: 9.90, img: 'https://drive.google.com/file/d/1mb8LFjsqG-GU5t76KI1RpTmmiXgwtoKa/view?usp=drive_link' }
+            { id: 'ex3', name: 'Polaroid', price: 9.90, img: 'https://drive.google.com/file/d/1mb8LFjsqG-GU5t76KI1RpTmmiXgwtoKa/view?usp=drive_link' },
+            // Nuevos agregados:
+            { id: 'ex4', name: 'Cajita detalle <3', price: 12.00, img: 'https://drive.google.com/file/d/1LNjFutSCExIqgjssRSuN76xlFo3t1c2P/view?usp=sharing' },
+            { id: 'ex5', name: 'Porta rosa/flor <3', price: 8.00, img: 'https://drive.google.com/file/d/1aJRB_684wI1-aTELInwJD1klDQO6PqjC/view?usp=sharing' }
         ];
-
         async function init() {
             try {
                 const res = await fetch(SHEET_URL + '&t=' + Date.now());
